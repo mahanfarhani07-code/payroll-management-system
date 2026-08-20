@@ -2,8 +2,11 @@
 <html lang="fa" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>تنظیمات حقوق و دستمزد</title>
 
@@ -97,10 +100,20 @@ select:focus {
     border-color: #38bdf8;
 }
 
-.unit {
-    color: #94a3b8;
-    margin-top: 6px;
+/* متن مبلغ به حروف */
+
+.price-words {
+    color: #64748b;
     font-size: 12px;
+    line-height: 1.8;
+    min-height: 22px;
+    margin-top: 6px;
+}
+
+.unit {
+    color: #64748b;
+    font-size: 11px;
+    margin-top: 3px;
 }
 
 .buttons {
@@ -204,23 +217,20 @@ button:hover {
 <div class="container">
 
 
-<!-- =================================
-     توضیحات
-================================= -->
-
 <section class="box">
+
 
 <div class="info">
 
 از این قسمت می‌توانید مقادیر پیش‌فرض سیستم را تنظیم کنید.
-این اطلاعات در مراحل بعدی برای محاسبه حقوق، مزایا و کسورات استفاده خواهند شد.
+مبالغ واردشده در قسمت‌های مالی، به‌صورت خودکار به حروف فارسی نمایش داده می‌شوند.
 
 </div>
 
 
-<!-- =================================
+<!-- =========================
      حقوق و مزایا
-================================= -->
+========================= -->
 
 <div class="card">
 
@@ -245,6 +255,11 @@ min="0"
 placeholder="مثلاً 100000000"
 >
 
+<div
+class="price-words"
+id="baseSalaryWords"
+></div>
+
 <span class="unit">
 ریال
 </span>
@@ -264,6 +279,11 @@ id="housing"
 min="0"
 placeholder="مبلغ حق مسکن"
 >
+
+<div
+class="price-words"
+id="housingWords"
+></div>
 
 <span class="unit">
 ریال
@@ -285,6 +305,11 @@ min="0"
 placeholder="مبلغ بن"
 >
 
+<div
+class="price-words"
+id="foodWords"
+></div>
+
 <span class="unit">
 ریال
 </span>
@@ -304,6 +329,11 @@ id="marriage"
 min="0"
 placeholder="مبلغ حق تأهل"
 >
+
+<div
+class="price-words"
+id="marriageWords"
+></div>
 
 <span class="unit">
 ریال
@@ -325,6 +355,11 @@ min="0"
 placeholder="مبلغ برای هر فرزند"
 >
 
+<div
+class="price-words"
+id="childWords"
+></div>
+
 <span class="unit">
 ریال
 </span>
@@ -345,6 +380,11 @@ min="0"
 placeholder="سایر مزایا"
 >
 
+<div
+class="price-words"
+id="otherBenefitsWords"
+></div>
+
 <span class="unit">
 ریال
 </span>
@@ -356,9 +396,9 @@ placeholder="سایر مزایا"
 </div>
 
 
-<!-- =================================
-     اضافه کاری
-================================= -->
+<!-- =========================
+     کارکرد
+========================= -->
 
 <div class="card">
 
@@ -509,9 +549,9 @@ value="16:00"
 </div>
 
 
-<!-- =================================
+<!-- =========================
      بیمه و مالیات
-================================= -->
+========================= -->
 
 <div class="card">
 
@@ -602,6 +642,11 @@ min="0"
 placeholder="مبلغ معافیت"
 >
 
+<div
+class="price-words"
+id="taxFreeLimitWords"
+></div>
+
 <span class="unit">
 ریال
 </span>
@@ -613,9 +658,9 @@ placeholder="مبلغ معافیت"
 </div>
 
 
-<!-- =================================
+<!-- =========================
      سایر تنظیمات
-================================= -->
+========================= -->
 
 <div class="card">
 
@@ -694,10 +739,6 @@ value="30"
 </div>
 
 
-<!-- =================================
-     دکمه ها
-================================= -->
-
 <div class="buttons">
 
 <button
@@ -744,378 +785,778 @@ id="success"
 <script>
 
 
-// =====================================
-// کلید ذخیره تنظیمات
-// =====================================
+/* =====================================
+   کلید ذخیره
+===================================== */
 
 const SETTINGS_KEY =
 "payrollSettings";
 
 
-// =====================================
-// دریافت تنظیمات
-// =====================================
+
+/* =====================================
+   تبدیل عدد به حروف فارسی
+===================================== */
+
+const ones = [
+"",
+"یک",
+"دو",
+"سه",
+"چهار",
+"پنج",
+"شش",
+"هفت",
+"هشت",
+"نه"
+];
+
+
+const teens = [
+"ده",
+"یازده",
+"دوازده",
+"سیزده",
+"چهارده",
+"پانزده",
+"شانزده",
+"هفده",
+"هجده",
+"نوزده"
+];
+
+
+const tens = [
+"",
+"",
+"بیست",
+"سی",
+"چهل",
+"پنجاه",
+"شصت",
+"هفتاد",
+"هشتاد",
+"نود"
+];
+
+
+const hundreds = [
+"",
+"صد",
+"دویست",
+"سیصد",
+"چهارصد",
+"پانصد",
+"ششصد",
+"هفتصد",
+"هشتصد",
+"نهصد"
+];
+
+
+const scales = [
+"",
+"هزار",
+"میلیون",
+"میلیارد",
+"تریلیون",
+"کوادریلیون"
+];
+
+
+function threeDigitsToWords(num) {
+
+    let result = [];
+
+    let h =
+        Math.floor(num / 100);
+
+    let remainder =
+        num % 100;
+
+
+    if (h > 0) {
+
+        result.push(
+            hundreds[h]
+        );
+
+    }
+
+
+    if (remainder >= 10 &&
+        remainder <= 19) {
+
+        result.push(
+            teens[remainder - 10]
+        );
+
+    }
+
+    else {
+
+        let t =
+            Math.floor(
+                remainder / 10
+            );
+
+        let o =
+            remainder % 10;
+
+
+        if (t > 0) {
+
+            result.push(
+                tens[t]
+            );
+
+        }
+
+
+        if (o > 0) {
+
+            result.push(
+                ones[o]
+            );
+
+        }
+
+    }
+
+
+    return result.join(" و ");
+
+}
+
+
+
+function numberToPersianWords(number) {
+
+    number =
+        Math.floor(
+            Number(number)
+        );
+
+
+    if (
+        isNaN(number) ||
+        number === 0
+    ) {
+
+        return "صفر";
+
+    }
+
+
+    if (number < 0) {
+
+        return "منفی " +
+        numberToPersianWords(
+            Math.abs(number)
+        );
+
+    }
+
+
+    let parts = [];
+
+    let scaleIndex = 0;
+
+
+    while (number > 0) {
+
+        let chunk =
+            number % 1000;
+
+
+        if (chunk !== 0) {
+
+            let words =
+                threeDigitsToWords(
+                    chunk
+                );
+
+
+            if (
+                scales[scaleIndex]
+            ) {
+
+                words +=
+                " " +
+                scales[scaleIndex];
+
+            }
+
+
+            parts.unshift(words);
+
+        }
+
+
+        number =
+            Math.floor(
+                number / 1000
+            );
+
+
+        scaleIndex++;
+
+    }
+
+
+    return parts.join(" و ");
+
+}
+
+
+
+/* =====================================
+   نمایش مبلغ به حروف
+===================================== */
+
+function updatePriceWords(
+    inputId,
+    outputId
+) {
+
+    const input =
+        document.getElementById(
+            inputId
+        );
+
+    const output =
+        document.getElementById(
+            outputId
+        );
+
+
+    if (!input || !output) {
+        return;
+    }
+
+
+    function update() {
+
+        const value =
+            Number(
+                input.value
+            );
+
+
+        if (
+            !input.value ||
+            value === 0
+        ) {
+
+            output.innerText = "";
+
+            return;
+
+        }
+
+
+        output.innerText =
+            numberToPersianWords(
+                value
+            )
+            +
+            " ریال";
+
+    }
+
+
+    input.addEventListener(
+        "input",
+        update
+    );
+
+
+    update();
+
+}
+
+
+
+/* =====================================
+   فعال کردن تبدیل برای مبالغ
+===================================== */
+
+updatePriceWords(
+    "baseSalary",
+    "baseSalaryWords"
+);
+
+updatePriceWords(
+    "housing",
+    "housingWords"
+);
+
+updatePriceWords(
+    "food",
+    "foodWords"
+);
+
+updatePriceWords(
+    "marriage",
+    "marriageWords"
+);
+
+updatePriceWords(
+    "child",
+    "childWords"
+);
+
+updatePriceWords(
+    "otherBenefits",
+    "otherBenefitsWords"
+);
+
+updatePriceWords(
+    "taxFreeLimit",
+    "taxFreeLimitWords"
+);
+
+
+
+/* =====================================
+   بارگذاری تنظیمات
+===================================== */
 
 function loadSettings() {
 
 
-const settings =
-JSON.parse(
-localStorage.getItem(
-SETTINGS_KEY
-)
-);
+    const settings =
+        JSON.parse(
+            localStorage.getItem(
+                SETTINGS_KEY
+            )
+        );
 
 
-if (!settings) {
+    if (!settings) {
+        return;
+    }
 
-return;
+
+    document.getElementById(
+        "baseSalary"
+    ).value =
+        settings.baseSalary || "";
+
+
+    document.getElementById(
+        "housing"
+    ).value =
+        settings.housing || "";
+
+
+    document.getElementById(
+        "food"
+    ).value =
+        settings.food || "";
+
+
+    document.getElementById(
+        "marriage"
+    ).value =
+        settings.marriage || "";
+
+
+    document.getElementById(
+        "child"
+    ).value =
+        settings.child || "";
+
+
+    document.getElementById(
+        "otherBenefits"
+    ).value =
+        settings.otherBenefits || "";
+
+
+    document.getElementById(
+        "monthlyHours"
+    ).value =
+        settings.monthlyHours || 176;
+
+
+    document.getElementById(
+        "overtimeRate"
+    ).value =
+        settings.overtimeRate || 1.4;
+
+
+    document.getElementById(
+        "nightRate"
+    ).value =
+        settings.nightRate || 1.35;
+
+
+    document.getElementById(
+        "holidayRate"
+    ).value =
+        settings.holidayRate || 1.4;
+
+
+    document.getElementById(
+        "missionRate"
+    ).value =
+        settings.missionRate || 1;
+
+
+    document.getElementById(
+        "workStart"
+    ).value =
+        settings.workStart || "08:00";
+
+
+    document.getElementById(
+        "workEnd"
+    ).value =
+        settings.workEnd || "16:00";
+
+
+    document.getElementById(
+        "insuranceRate"
+    ).value =
+        settings.insuranceRate || 7;
+
+
+    document.getElementById(
+        "employerInsuranceRate"
+    ).value =
+        settings.employerInsuranceRate || 23;
+
+
+    document.getElementById(
+        "taxRate"
+    ).value =
+        settings.taxRate || 10;
+
+
+    document.getElementById(
+        "taxFreeLimit"
+    ).value =
+        settings.taxFreeLimit || "";
+
+
+    document.getElementById(
+        "currency"
+    ).value =
+        settings.currency || "ریال";
+
+
+    document.getElementById(
+        "workingDays"
+    ).value =
+        settings.workingDays || 26;
+
+
+    document.getElementById(
+        "monthDays"
+    ).value =
+        settings.monthDays || 30;
+
+
+    /*
+       به‌روزرسانی متن حروف
+    */
+
+    updateAllPriceWords();
 
 }
 
 
-document.getElementById(
-"baseSalary"
-).value =
-settings.baseSalary || "";
+
+/* =====================================
+   به‌روزرسانی همه مبالغ
+===================================== */
+
+function updateAllPriceWords() {
+
+    const fields = [
+
+        ["baseSalary", "baseSalaryWords"],
+
+        ["housing", "housingWords"],
+
+        ["food", "foodWords"],
+
+        ["marriage", "marriageWords"],
+
+        ["child", "childWords"],
+
+        ["otherBenefits", "otherBenefitsWords"],
+
+        ["taxFreeLimit", "taxFreeLimitWords"]
+
+    ];
 
 
-document.getElementById(
-"housing"
-).value =
-settings.housing || "";
+    fields.forEach(function(item) {
+
+        const input =
+            document.getElementById(
+                item[0]
+            );
+
+        const output =
+            document.getElementById(
+                item[1]
+            );
 
 
-document.getElementById(
-"food"
-).value =
-settings.food || "";
+        if (
+            input &&
+            output &&
+            input.value
+        ) {
+
+            const value =
+                Number(
+                    input.value
+                );
 
 
-document.getElementById(
-"marriage"
-).value =
-settings.marriage || "";
+            if (value > 0) {
 
+                output.innerText =
+                    numberToPersianWords(
+                        value
+                    )
+                    +
+                    " ریال";
 
-document.getElementById(
-"child"
-).value =
-settings.child || "";
+            }
 
+        }
 
-document.getElementById(
-"otherBenefits"
-).value =
-settings.otherBenefits || "";
-
-
-document.getElementById(
-"monthlyHours"
-).value =
-settings.monthlyHours || 176;
-
-
-document.getElementById(
-"overtimeRate"
-).value =
-settings.overtimeRate || 1.4;
-
-
-document.getElementById(
-"nightRate"
-).value =
-settings.nightRate || 1.35;
-
-
-document.getElementById(
-"holidayRate"
-).value =
-settings.holidayRate || 1.4;
-
-
-document.getElementById(
-"missionRate"
-).value =
-settings.missionRate || 1;
-
-
-document.getElementById(
-"workStart"
-).value =
-settings.workStart || "08:00";
-
-
-document.getElementById(
-"workEnd"
-).value =
-settings.workEnd || "16:00";
-
-
-document.getElementById(
-"insuranceRate"
-).value =
-settings.insuranceRate || 7;
-
-
-document.getElementById(
-"employerInsuranceRate"
-).value =
-settings.employerInsuranceRate || 23;
-
-
-document.getElementById(
-"taxRate"
-).value =
-settings.taxRate || 10;
-
-
-document.getElementById(
-"taxFreeLimit"
-).value =
-settings.taxFreeLimit || "";
-
-
-document.getElementById(
-"currency"
-).value =
-settings.currency || "ریال";
-
-
-document.getElementById(
-"workingDays"
-).value =
-settings.workingDays || 26;
-
-
-document.getElementById(
-"monthDays"
-).value =
-settings.monthDays || 30;
+    });
 
 }
 
 
-// =====================================
-// ذخیره
-// =====================================
+
+/* =====================================
+   ذخیره تنظیمات
+===================================== */
 
 function saveSettings() {
 
 
-const settings = {
+    const settings = {
 
-baseSalary:
-Number(
-document.getElementById(
-"baseSalary"
-).value
-) || 0,
+        baseSalary:
+            Number(
+                document.getElementById(
+                    "baseSalary"
+                ).value
+            ) || 0,
 
-housing:
-Number(
-document.getElementById(
-"housing"
-).value
-) || 0,
+        housing:
+            Number(
+                document.getElementById(
+                    "housing"
+                ).value
+            ) || 0,
 
-food:
-Number(
-document.getElementById(
-"food"
-).value
-) || 0,
+        food:
+            Number(
+                document.getElementById(
+                    "food"
+                ).value
+            ) || 0,
 
-marriage:
-Number(
-document.getElementById(
-"marriage"
-).value
-) || 0,
+        marriage:
+            Number(
+                document.getElementById(
+                    "marriage"
+                ).value
+            ) || 0,
 
-child:
-Number(
-document.getElementById(
-"child"
-).value
-) || 0,
+        child:
+            Number(
+                document.getElementById(
+                    "child"
+                ).value
+            ) || 0,
 
-otherBenefits:
-Number(
-document.getElementById(
-"otherBenefits"
-).value
-) || 0,
+        otherBenefits:
+            Number(
+                document.getElementById(
+                    "otherBenefits"
+                ).value
+            ) || 0,
 
-monthlyHours:
-Number(
-document.getElementById(
-"monthlyHours"
-).value
-) || 176,
+        monthlyHours:
+            Number(
+                document.getElementById(
+                    "monthlyHours"
+                ).value
+            ) || 176,
 
-overtimeRate:
-Number(
-document.getElementById(
-"overtimeRate"
-).value
-) || 1.4,
+        overtimeRate:
+            Number(
+                document.getElementById(
+                    "overtimeRate"
+                ).value
+            ) || 1.4,
 
-nightRate:
-Number(
-document.getElementById(
-"nightRate"
-).value
-) || 1.35,
+        nightRate:
+            Number(
+                document.getElementById(
+                    "nightRate"
+                ).value
+            ) || 1.35,
 
-holidayRate:
-Number(
-document.getElementById(
-"holidayRate"
-).value
-) || 1.4,
+        holidayRate:
+            Number(
+                document.getElementById(
+                    "holidayRate"
+                ).value
+            ) || 1.4,
 
-missionRate:
-Number(
-document.getElementById(
-"missionRate"
-).value
-) || 1,
+        missionRate:
+            Number(
+                document.getElementById(
+                    "missionRate"
+                ).value
+            ) || 1,
 
-workStart:
-document.getElementById(
-"workStart"
-).value,
+        workStart:
+            document.getElementById(
+                "workStart"
+            ).value,
 
-workEnd:
-document.getElementById(
-"workEnd"
-).value,
+        workEnd:
+            document.getElementById(
+                "workEnd"
+            ).value,
 
-insuranceRate:
-Number(
-document.getElementById(
-"insuranceRate"
-).value
-) || 7,
+        insuranceRate:
+            Number(
+                document.getElementById(
+                    "insuranceRate"
+                ).value
+            ) || 7,
 
-employerInsuranceRate:
-Number(
-document.getElementById(
-"employerInsuranceRate"
-).value
-) || 23,
+        employerInsuranceRate:
+            Number(
+                document.getElementById(
+                    "employerInsuranceRate"
+                ).value
+            ) || 23,
 
-taxRate:
-Number(
-document.getElementById(
-"taxRate"
-).value
-) || 10,
+        taxRate:
+            Number(
+                document.getElementById(
+                    "taxRate"
+                ).value
+            ) || 10,
 
-taxFreeLimit:
-Number(
-document.getElementById(
-"taxFreeLimit"
-).value
-) || 0,
+        taxFreeLimit:
+            Number(
+                document.getElementById(
+                    "taxFreeLimit"
+                ).value
+            ) || 0,
 
-currency:
-document.getElementById(
-"currency"
-).value,
+        currency:
+            document.getElementById(
+                "currency"
+            ).value,
 
-workingDays:
-Number(
-document.getElementById(
-"workingDays"
-).value
-) || 26,
+        workingDays:
+            Number(
+                document.getElementById(
+                    "workingDays"
+                ).value
+            ) || 26,
 
-monthDays:
-Number(
-document.getElementById(
-"monthDays"
-).value
-) || 30
+        monthDays:
+            Number(
+                document.getElementById(
+                    "monthDays"
+                ).value
+            ) || 30
 
-};
-
-
-// ذخیره در مرورگر
-
-localStorage.setItem(
-SETTINGS_KEY,
-JSON.stringify(
-settings
-)
-);
+    };
 
 
-// پیام موفقیت
-
-const success =
-document.getElementById(
-"success"
-);
-
-success.style.display =
-"block";
+    localStorage.setItem(
+        SETTINGS_KEY,
+        JSON.stringify(
+            settings
+        )
+    );
 
 
-setTimeout(function() {
+    const success =
+        document.getElementById(
+            "success"
+        );
 
-success.style.display =
-"none";
 
-}, 3000);
+    success.style.display =
+        "block";
+
+
+    setTimeout(function() {
+
+        success.style.display =
+            "none";
+
+    }, 3000);
 
 }
 
 
-// =====================================
-// بازگردانی
-// =====================================
+
+/* =====================================
+   بازگردانی پیش‌فرض
+===================================== */
 
 function resetSettings() {
 
 
-if (
-!confirm(
-"آیا می‌خواهید همه تنظیمات به مقدار پیش‌فرض برگردد؟"
-)
-) {
+    if (
+        !confirm(
+            "آیا می‌خواهید همه تنظیمات به مقدار پیش‌فرض برگردد؟"
+        )
+    ) {
 
-return;
+        return;
+
+    }
+
+
+    localStorage.removeItem(
+        SETTINGS_KEY
+    );
+
+
+    location.reload();
 
 }
 
 
-localStorage.removeItem(
-SETTINGS_KEY
-);
 
-
-location.reload();
-
-}
-
-
-// =====================================
-// صفحه اصلی
-// =====================================
+/* =====================================
+   صفحه اصلی
+===================================== */
 
 function goHome() {
 
-window.location.href =
-"index.html";
+    window.location.href =
+        "index.html";
 
 }
 
 
-// =====================================
-// شروع
-// =====================================
+
+/* =====================================
+   شروع
+===================================== */
 
 loadSettings();
 
