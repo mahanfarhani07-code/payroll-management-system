@@ -1,251 +1,253 @@
-```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-    <title>محاسبه حقوق و دستمزد</title>
+<title>محاسبه حقوق و دستمزد</title>
 
-    <style>
+<style>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        body {
-            font-family: Tahoma, Arial, sans-serif;
-            background: #0f172a;
-            color: white;
-            min-height: 100vh;
-        }
+body {
+    font-family: Tahoma, Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+    min-height: 100vh;
+}
 
-        .header {
-            background: #172033;
-            padding: 28px;
-            text-align: center;
-            border-bottom: 2px solid #334155;
-        }
+.header {
+    background: #172033;
+    padding: 28px;
+    text-align: center;
+    border-bottom: 2px solid #334155;
+}
 
-        .header h1 {
-            margin-bottom: 10px;
-        }
+.header h1 {
+    margin-bottom: 10px;
+}
 
-        .header p {
-            color: #94a3b8;
-        }
+.header p {
+    color: #94a3b8;
+}
 
-        .container {
-            width: 94%;
-            max-width: 1400px;
-            margin: 30px auto;
-        }
+.container {
+    width: 94%;
+    max-width: 1400px;
+    margin: 30px auto;
+}
 
-        .box {
-            background: #1e293b;
-            padding: 28px;
-            border-radius: 20px;
-            border: 1px solid #334155;
-            margin-bottom: 25px;
-        }
+.box {
+    background: #1e293b;
+    padding: 28px;
+    border-radius: 20px;
+    border: 1px solid #334155;
+    margin-bottom: 25px;
+}
 
-        .box h2 {
-            margin-bottom: 22px;
-        }
+.box h2 {
+    margin-bottom: 22px;
+}
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
+.info {
+    background: #172033;
+    border-right: 4px solid #38bdf8;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: #cbd5e1;
+    line-height: 2;
+}
 
-        .input-group {
-            display: flex;
-            flex-direction: column;
-        }
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
 
-        label {
-            color: #cbd5e1;
-            margin-bottom: 8px;
-        }
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
 
-        input,
-        select {
-            padding: 13px;
-            border-radius: 10px;
-            border: 1px solid #475569;
-            background: #0f172a;
-            color: white;
-            font-family: inherit;
-            font-size: 15px;
-        }
+label {
+    color: #cbd5e1;
+    margin-bottom: 8px;
+}
 
-        input:focus,
-        select:focus {
-            outline: none;
-            border-color: #38bdf8;
-        }
+input,
+select {
+    padding: 13px;
+    border-radius: 10px;
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: white;
+    font-family: inherit;
+}
 
-        .buttons {
-            margin-top: 25px;
-            display: flex;
-            gap: 12px;
-        }
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #38bdf8;
+}
 
-        button {
-            border: none;
-            border-radius: 10px;
-            padding: 13px 22px;
-            color: white;
-            font-family: inherit;
-            font-size: 15px;
-            cursor: pointer;
-        }
+.buttons {
+    margin-top: 25px;
+    display: flex;
+    gap: 12px;
+}
 
-        .calculate-btn {
-            background: #16a34a;
-        }
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 13px 22px;
+    color: white;
+    font-family: inherit;
+    font-size: 15px;
+    cursor: pointer;
+}
 
-        .calculate-btn:hover {
-            background: #15803d;
-        }
+.calculate-btn {
+    background: #16a34a;
+}
 
-        .back-btn {
-            background: #475569;
-        }
+.calculate-btn:hover {
+    background: #15803d;
+}
 
-        .result {
-            display: none;
-        }
+.back-btn {
+    background: #475569;
+}
 
-        .salary-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
+.result {
+    display: none;
+}
 
-        .salary-card {
-            background: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 14px;
-            padding: 20px;
-        }
+.salary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
 
-        .salary-card .title {
-            color: #94a3b8;
-            margin-bottom: 10px;
-        }
+.salary-card {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 14px;
+    padding: 20px;
+}
 
-        .salary-card .value {
-            font-size: 20px;
-            font-weight: bold;
-            color: #38bdf8;
-        }
+.salary-card .title {
+    color: #94a3b8;
+    margin-bottom: 10px;
+}
 
-        .gross {
-            border: 1px solid #16a34a;
-        }
+.salary-card .value {
+    font-size: 20px;
+    font-weight: bold;
+    color: #38bdf8;
+}
 
-        .gross .value {
-            color: #4ade80;
-        }
+.gross {
+    border-color: #16a34a;
+}
 
-        .deduction {
-            border: 1px solid #dc2626;
-        }
+.gross .value {
+    color: #4ade80;
+}
 
-        .deduction .value {
-            color: #f87171;
-        }
+.deduction {
+    border-color: #dc2626;
+}
 
-        .net {
-            grid-column: 1 / -1;
-            background: #064e3b;
-            border: 2px solid #22c55e;
-            text-align: center;
-            padding: 30px;
-            border-radius: 18px;
-            margin-top: 10px;
-        }
+.deduction .value {
+    color: #f87171;
+}
 
-        .net .title {
-            color: #bbf7d0;
-            font-size: 18px;
-            margin-bottom: 12px;
-        }
+.loan-card {
+    border-color: #f59e0b;
+}
 
-        .net .value {
-            font-size: 34px;
-            font-weight: bold;
-            color: #4ade80;
-        }
+.loan-card .value {
+    color: #fbbf24;
+}
 
-        .table-container {
-            overflow-x: auto;
-        }
+.net {
+    grid-column: 1 / -1;
+    background: #064e3b;
+    border: 2px solid #22c55e;
+    text-align: center;
+    padding: 30px;
+    border-radius: 18px;
+    margin-top: 10px;
+}
 
-        table {
-            width: 100%;
-            min-width: 1200px;
-            border-collapse: collapse;
-        }
+.net .title {
+    color: #bbf7d0;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
 
-        th,
-        td {
-            padding: 13px;
-            text-align: center;
-            border-bottom: 1px solid #334155;
-        }
+.net .value {
+    font-size: 34px;
+    font-weight: bold;
+    color: #4ade80;
+}
 
-        th {
-            background: #172033;
-            color: #38bdf8;
-        }
+.table-container {
+    overflow-x: auto;
+}
 
-        .empty {
-            padding: 30px;
-            color: #94a3b8;
-            text-align: center;
-        }
+table {
+    width: 100%;
+    min-width: 1200px;
+    border-collapse: collapse;
+}
 
-        .delete-btn {
-            background: #dc2626;
-            padding: 8px 14px;
-        }
+th,
+td {
+    padding: 13px;
+    text-align: center;
+    border-bottom: 1px solid #334155;
+}
 
-        .delete-btn:hover {
-            background: #b91c1c;
-        }
+th {
+    background: #172033;
+    color: #38bdf8;
+}
 
-        .info {
-            background: #172033;
-            border-right: 4px solid #38bdf8;
-            padding: 15px;
-            margin-bottom: 20px;
-            color: #cbd5e1;
-            line-height: 2;
-        }
+.empty {
+    padding: 30px;
+    color: #94a3b8;
+    text-align: center;
+}
 
-        @media (max-width: 900px) {
+.delete-btn {
+    background: #dc2626;
+    padding: 8px 14px;
+}
 
-            .form-grid,
-            .salary-grid {
-                grid-template-columns: 1fr;
-            }
+@media (max-width: 900px) {
 
-            .buttons {
-                flex-direction: column;
-            }
+    .form-grid,
+    .salary-grid {
+        grid-template-columns: 1fr;
+    }
 
-        }
+    .buttons {
+        flex-direction: column;
+    }
 
-    </style>
+}
+
+</style>
 
 </head>
 
@@ -255,11 +257,13 @@
 
 <header class="header">
 
-    <h1>💵 محاسبه حقوق و دستمزد</h1>
+<h1>
+💵 محاسبه حقوق و دستمزد
+</h1>
 
-    <p>
-        محاسبه حقوق بر اساس اطلاعات پرسنل و کارکرد
-    </p>
+<p>
+محاسبه حقوق، مزایا، اضافه‌کاری، کسورات و اقساط
+</p>
 
 </header>
 
@@ -267,944 +271,1235 @@
 <div class="container">
 
 
-    <!-- انتخاب پرسنل -->
+<!-- =====================================
+انتخاب اطلاعات
+===================================== -->
 
-    <section class="box">
+<section class="box">
 
-        <h2>🧮 اطلاعات محاسبه</h2>
+<h2>
+🧮 اطلاعات محاسبه
+</h2>
 
-        <div class="info">
 
-            ابتدا پرسنل و ماه موردنظر را انتخاب کنید.
-            سیستم اطلاعات حقوق پایه، مزایا و کارکرد را
-            از اطلاعات ثبت‌شده دریافت می‌کند.
+<div class="info">
 
-        </div>
+پرسنل و ماه را انتخاب کنید.
+سیستم اطلاعات کارکرد، حقوق و اقساط وام را
+به‌صورت خودکار دریافت می‌کند.
 
+</div>
 
-        <div class="form-grid">
 
+<div class="form-grid">
 
-            <div class="input-group">
 
-                <label>
-                    پرسنل
-                </label>
+<div class="input-group">
 
-                <select id="employee">
+<label>
+پرسنل
+</label>
 
-                    <option value="">
-                        انتخاب پرسنل
-                    </option>
+<select id="employee">
 
-                </select>
+<option value="">
+انتخاب پرسنل
+</option>
 
-            </div>
+</select>
 
+</div>
 
-            <div class="input-group">
 
-                <label>
-                    ماه
-                </label>
+<div class="input-group">
 
-                <input
-                    type="month"
-                    id="month"
-                >
+<label>
+ماه
+</label>
 
-            </div>
+<input
+type="month"
+id="month"
+>
 
+</div>
 
-            <div class="input-group">
 
-                <label>
-                    روزهای ماه
-                </label>
+<div class="input-group">
 
-                <input
-                    type="number"
-                    id="monthDays"
-                    value="30"
-                    min="1"
-                >
+<label>
+روزهای ماه
+</label>
 
-            </div>
+<input
+type="number"
+id="monthDays"
+value="30"
+min="1"
+>
 
+</div>
 
-            <div class="input-group">
 
-                <label>
-                    ساعات موظفی ماه
-                </label>
+<div class="input-group">
 
-                <input
-                    type="number"
-                    id="requiredHours"
-                    value="176"
-                    min="1"
-                >
+<label>
+ساعات موظفی ماه
+</label>
 
-            </div>
+<input
+type="number"
+id="requiredHours"
+value="176"
+min="1"
+>
 
-
-        </div>
-
-
-        <div class="buttons">
-
-            <button
-                class="calculate-btn"
-                onclick="calculateSalary()"
-            >
-                🧮 محاسبه حقوق
-            </button>
-
-
-            <button
-                class="back-btn"
-                onclick="goHome()"
-            >
-                🏠 صفحه اصلی
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- نتیجه محاسبه -->
-
-    <section
-        class="box result"
-        id="resultBox"
-    >
-
-        <h2>
-            📊 نتیجه محاسبه حقوق
-        </h2>
-
-
-        <div class="salary-grid">
-
-
-            <div class="salary-card">
-
-                <div class="title">
-                    حقوق پایه
-                </div>
-
-                <div
-                    class="value"
-                    id="baseSalary"
-                >
-                    0
-                </div>
-
-            </div>
-
-
-            <div class="salary-card">
-
-                <div class="title">
-                    مزایای ثابت
-                </div>
-
-                <div
-                    class="value"
-                    id="benefits"
-                >
-                    0
-                </div>
-
-            </div>
-
-
-            <div class="salary-card">
-
-                <div class="title">
-                    اضافه‌کاری
-                </div>
-
-                <div
-                    class="value"
-                    id="overtimePay"
-                >
-                    0
-                </div>
-
-            </div>
-
-
-            <div class="salary-card">
-
-                <div class="title">
-                    شب‌کاری
-                </div>
-
-                <div
-                    class="value"
-                    id="nightPay"
-                >
-                    0
-                </div>
-
-            </div>
-
-
-            <div class="salary-card">
-
-                <div class="title">
-                    تعطیل‌کاری
-                </div>
-
-                <div
-                    class="value"
-                    id="holidayPay"
-                >
-                    0
-                </div>
-
-            </div>
-
-
-            <div class="salary-card deduction">
-
-                <div class="title">
-                    کسر غیبت
-                </div>
-
-                <div
-                    class="value"
-                    id="absenceDeduction"
-                >
-                    0
-                </div>
-
-            </div>
-
-
-            <div class="salary-card gross">
-
-                <div class="title">
-                    حقوق ناخالص
-                </div>
-
-                <div
-                    class="value"
-                    id="grossSalary"
-                >
-                    0
-                </div>
-
-            </div>
-
-
-            <div class="net">
-
-                <div class="title">
-                    💰 حقوق قابل پرداخت
-                </div>
-
-                <div
-                    class="value"
-                    id="netSalary"
-                >
-                    0
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-    <!-- تاریخچه حقوق -->
-
-    <section class="box">
-
-        <h2>
-            📋 حقوق‌های محاسبه‌شده
-        </h2>
-
-
-        <div class="table-container">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            پرسنل
-                        </th>
-
-                        <th>
-                            ماه
-                        </th>
-
-                        <th>
-                            حقوق پایه
-                        </th>
-
-                        <th>
-                            مزایا
-                        </th>
-
-                        <th>
-                            اضافه‌کاری
-                        </th>
-
-                        <th>
-                            شب‌کاری
-                        </th>
-
-                        <th>
-                            تعطیل‌کاری
-                        </th>
-
-                        <th>
-                            غیبت
-                        </th>
-
-                        <th>
-                            ناخالص
-                        </th>
-
-                        <th>
-                            خالص
-                        </th>
-
-                        <th>
-                            عملیات
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody id="payrollTable">
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </section>
+</div>
 
 
 </div>
 
 
+<div class="buttons">
+
+<button
+class="calculate-btn"
+onclick="calculateSalary()"
+>
+🧮 محاسبه حقوق
+</button>
+
+
+<button
+class="back-btn"
+onclick="goHome()"
+>
+🏠 صفحه اصلی
+</button>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================
+نتیجه
+===================================== -->
+
+<section
+class="box result"
+id="resultBox"
+>
+
+<h2>
+📊 نتیجه محاسبه
+</h2>
+
+
+<div class="salary-grid">
+
+
+<div class="salary-card">
+
+<div class="title">
+حقوق پایه
+</div>
+
+<div
+class="value"
+id="baseSalary"
+>
+0
+</div>
+
+</div>
+
+
+<div class="salary-card">
+
+<div class="title">
+مزایای ثابت
+</div>
+
+<div
+class="value"
+id="benefits"
+>
+0
+</div>
+
+</div>
+
+
+<div class="salary-card">
+
+<div class="title">
+اضافه‌کاری
+</div>
+
+<div
+class="value"
+id="overtimePay"
+>
+0
+</div>
+
+</div>
+
+
+<div class="salary-card">
+
+<div class="title">
+شب‌کاری
+</div>
+
+<div
+class="value"
+id="nightPay"
+>
+0
+</div>
+
+</div>
+
+
+<div class="salary-card">
+
+<div class="title">
+تعطیل‌کاری
+</div>
+
+<div
+class="value"
+id="holidayPay"
+>
+0
+</div>
+
+</div>
+
+
+<div class="salary-card deduction">
+
+<div class="title">
+کسر غیبت
+</div>
+
+<div
+class="value"
+id="absenceDeduction"
+>
+0
+</div>
+
+</div>
+
+
+<div class="salary-card deduction">
+
+<div class="title">
+بیمه
+</div>
+
+<div
+class="value"
+id="insurance"
+>
+0
+</div>
+
+</div>
+
+
+<div class="salary-card deduction">
+
+<div class="title">
+مالیات
+</div>
+
+<div
+class="value"
+id="tax"
+>
+0
+</div>
+
+</div>
+
+
+<div class="salary-card loan-card">
+
+<div class="title">
+قسط وام
+</div>
+
+<div
+class="value"
+id="loanDeduction"
+>
+0
+</div>
+
+</div>
+
+
+<div class="salary-card loan-card">
+
+<div class="title">
+مساعده
+</div>
+
+<div
+class="value"
+id="advanceDeduction"
+>
+0
+</div>
+
+</div>
+
+
+<div class="salary-card gross">
+
+<div class="title">
+حقوق ناخالص
+</div>
+
+<div
+class="value"
+id="grossSalary"
+>
+0
+</div>
+
+</div>
+
+
+<div class="net">
+
+<div class="title">
+💰 حقوق قابل پرداخت
+</div>
+
+<div
+class="value"
+id="netSalary"
+>
+0
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================
+تاریخچه
+===================================== -->
+
+<section class="box">
+
+<h2>
+📋 حقوق‌های محاسبه‌شده
+</h2>
+
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+پرسنل
+</th>
+
+<th>
+ماه
+</th>
+
+<th>
+حقوق پایه
+</th>
+
+<th>
+مزایا
+</th>
+
+<th>
+اضافه‌کاری
+</th>
+
+<th>
+شب‌کاری
+</th>
+
+<th>
+تعطیل‌کاری
+</th>
+
+<th>
+غیبت
+</th>
+
+<th>
+قسط وام
+</th>
+
+<th>
+مساعده
+</th>
+
+<th>
+ناخالص
+</th>
+
+<th>
+خالص
+</th>
+
+<th>
+عملیات
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="payrollTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+</div>
+
+
+
 <script>
 
 
-    // =========================================
-    // دریافت اطلاعات
-    // =========================================
+// =====================================
+// دریافت اطلاعات
+// =====================================
 
-    let employees =
-        JSON.parse(
-            localStorage.getItem("employees")
-        ) || [];
+let employees =
+JSON.parse(
+localStorage.getItem("employees")
+) || [];
 
 
-    let attendanceRecords =
-        JSON.parse(
-            localStorage.getItem("attendanceRecords")
-        ) || [];
+let attendanceRecords =
+JSON.parse(
+localStorage.getItem("attendanceRecords")
+) || [];
 
 
-    let payrollRecords =
-        JSON.parse(
-            localStorage.getItem("payrollRecords")
-        ) || [];
+let payrollRecords =
+JSON.parse(
+localStorage.getItem("payrollRecords")
+) || [];
 
 
-    // =========================================
-    // پر کردن لیست پرسنل
-    // =========================================
+let loans =
+JSON.parse(
+localStorage.getItem("loans")
+) || [];
 
-    function loadEmployees() {
 
-        const select =
-            document.getElementById("employee");
+// =====================================
+// بارگذاری پرسنل
+// =====================================
 
+function loadEmployees() {
 
-        select.innerHTML =
-            `<option value="">
-                انتخاب پرسنل
-            </option>`;
+const select =
+document.getElementById("employee");
 
+select.innerHTML =
+`
+<option value="">
+انتخاب پرسنل
+</option>
+`;
 
-        employees.forEach(function(employee) {
+employees.forEach(function(employee) {
 
-            const option =
-                document.createElement("option");
+const option =
+document.createElement("option");
 
+option.value =
+employee.personnelCode;
 
-            option.value =
-                employee.personnelCode;
+option.textContent =
+employee.personnelCode +
+" - " +
+employee.fullName;
 
+select.appendChild(option);
 
-            option.textContent =
-                employee.personnelCode +
-                " - " +
-                employee.fullName;
+});
 
+}
 
-            select.appendChild(option);
 
-        });
+// =====================================
+// فرمت مبلغ
+// =====================================
 
-    }
+function money(value) {
 
+return Number(value || 0)
+.toLocaleString("fa-IR")
++
+" ریال";
 
-    // =========================================
-    // فرمت عدد
-    // =========================================
+}
 
-    function money(value) {
 
-        return Number(value || 0)
-            .toLocaleString("fa-IR") +
-            " ریال";
+// =====================================
+// پیدا کردن اقساط ماه
+// =====================================
 
-    }
+function getMonthlyDeductions(
+personnelCode,
+month
+) {
 
 
-    // =========================================
-    // محاسبه حقوق
-    // =========================================
+let loanDeduction = 0;
 
-    function calculateSalary() {
+let advanceDeduction = 0;
 
 
-        const personnelCode =
-            document.getElementById(
-                "employee"
-            ).value;
+loans.forEach(function(loan) {
 
 
-        const month =
-            document.getElementById(
-                "month"
-            ).value;
+if (
+loan.personnelCode !==
+personnelCode
+) {
 
+return;
 
-        const monthDays =
-            Number(
-                document.getElementById(
-                    "monthDays"
-                ).value
-            );
+}
 
 
-        const requiredHours =
-            Number(
-                document.getElementById(
-                    "requiredHours"
-                ).value
-            );
+if (
+Number(loan.remainingAmount || 0)
+<= 0
+) {
 
+return;
 
-        if (!personnelCode) {
+}
 
-            alert(
-                "لطفاً پرسنل را انتخاب کنید."
-            );
 
-            return;
+/*
+اگر تاریخ شروع مشخص شده باشد،
+کسر از همان ماه به بعد انجام می‌شود.
+*/
 
-        }
+if (
+loan.startMonth &&
+month < loan.startMonth
+) {
 
+return;
 
-        if (!month) {
+}
 
-            alert(
-                "لطفاً ماه را انتخاب کنید."
-            );
 
-            return;
+/*
+وام
+*/
 
-        }
+if (
+loan.type === "loan"
+) {
 
+loanDeduction +=
+Math.min(
+Number(loan.installmentAmount || 0),
+Number(loan.remainingAmount || 0)
+);
 
-        const employee =
-            employees.find(function(item) {
+}
 
-                return item.personnelCode ===
-                    personnelCode;
 
-            });
+/*
+مساعده
+*/
 
+if (
+loan.type === "advance"
+) {
 
-        if (!employee) {
+advanceDeduction +=
+Math.min(
+Number(loan.installmentAmount || 0),
+Number(loan.remainingAmount || 0)
+);
 
-            alert(
-                "اطلاعات پرسنل پیدا نشد."
-            );
+}
 
-            return;
+});
 
-        }
 
+return {
 
-        // =====================================
-        // دریافت اطلاعات کارکرد
-        // =====================================
+loanDeduction:
+loanDeduction,
 
-        const attendance =
-            attendanceRecords.find(function(record) {
+advanceDeduction:
+advanceDeduction
 
-                return record.personnelCode ===
-                    personnelCode &&
-                    record.month ===
-                    month;
+};
 
-            });
+}
 
 
-        if (!attendance) {
+// =====================================
+// محاسبه حقوق
+// =====================================
 
-            alert(
-                "برای این پرسنل در ماه انتخاب‌شده کارکرد ثبت نشده است."
-            );
+function calculateSalary() {
 
-            return;
 
-        }
+const personnelCode =
+document.getElementById(
+"employee"
+).value;
 
 
-        // =====================================
-        // اطلاعات حقوق
-        // =====================================
+const month =
+document.getElementById(
+"month"
+).value;
 
-        const baseSalary =
-            Number(employee.baseSalary) || 0;
 
+const monthDays =
+Number(
+document.getElementById(
+"monthDays"
+).value
+);
 
-        const benefits =
-            Number(employee.benefits) || 0;
 
+const requiredHours =
+Number(
+document.getElementById(
+"requiredHours"
+).value
+);
 
-        // =====================================
-        // نرخ ساعتی
-        // =====================================
 
-        const hourlyRate =
-            requiredHours > 0
-                ? baseSalary / requiredHours
-                : 0;
+if (!personnelCode) {
 
+alert(
+"لطفاً پرسنل را انتخاب کنید."
+);
 
-        // =====================================
-        // اضافه کاری
-        // فعلاً ضریب 1.4
-        // =====================================
+return;
 
-        const overtimeRate = 1.4;
+}
 
 
-        const overtimePay =
-            hourlyRate *
-            Number(attendance.overtimeHours || 0) *
-            overtimeRate;
+if (!month) {
 
+alert(
+"لطفاً ماه را انتخاب کنید."
+);
 
-        // =====================================
-        // شب کاری
-        // فعلاً ضریب 0.35
-        // =====================================
+return;
 
-        const nightRate = 0.35;
+}
 
 
-        const nightPay =
-            hourlyRate *
-            Number(attendance.nightHours || 0) *
-            nightRate;
+const employee =
+employees.find(function(item) {
 
+return item.personnelCode ===
+personnelCode;
 
-        // =====================================
-        // تعطیل کاری
-        // فعلاً ضریب 1.4
-        // =====================================
+});
 
-        const holidayRate = 1.4;
 
+if (!employee) {
 
-        const holidayPay =
-            hourlyRate *
-            Number(attendance.holidayHours || 0) *
-            holidayRate;
+alert(
+"اطلاعات پرسنل پیدا نشد."
+);
 
+return;
 
-        // =====================================
-        // کسر غیبت
-        // =====================================
+}
 
-        const dailyRate =
-            monthDays > 0
-                ? baseSalary / monthDays
-                : 0;
 
+// =====================================
+// کارکرد
+// =====================================
 
-        const absenceDeduction =
-            dailyRate *
-            Number(attendance.absenceDays || 0);
+const attendance =
+attendanceRecords.find(function(record) {
 
+return record.personnelCode ===
+personnelCode &&
+record.month ===
+month;
 
-        // =====================================
-        // حقوق ناخالص
-        // =====================================
+});
 
-        const grossSalary =
-            baseSalary +
-            benefits +
-            overtimePay +
-            nightPay +
-            holidayPay -
-            absenceDeduction;
 
+if (!attendance) {
 
-        // =====================================
-        // فعلاً کسورات بیمه و مالیات صفر
-        // =====================================
+alert(
+"برای این پرسنل در این ماه کارکرد ثبت نشده است."
+);
 
-        const insurance = 0;
+return;
 
-        const tax = 0;
+}
 
-        const loan = 0;
 
-        const advance = 0;
+// =====================================
+// حقوق پایه و مزایا
+// =====================================
 
+const baseSalary =
+Number(
+employee.baseSalary
+) || 0;
 
-        // =====================================
-        // حقوق خالص
-        // =====================================
 
-        const netSalary =
-            grossSalary -
-            insurance -
-            tax -
-            loan -
-            advance;
+const benefits =
+Number(
+employee.benefits
+) || 0;
 
 
-        // =====================================
-        // نمایش نتیجه
-        // =====================================
+// =====================================
+// نرخ ساعتی
+// =====================================
 
-        document.getElementById(
-            "resultBox"
-        ).style.display = "block";
+const hourlyRate =
+requiredHours > 0
+?
+baseSalary / requiredHours
+:
+0;
 
 
-        document.getElementById(
-            "baseSalary"
-        ).innerText =
-            money(baseSalary);
+// =====================================
+// اضافه کاری
+// =====================================
 
+const overtimeRate =
+1.4;
 
-        document.getElementById(
-            "benefits"
-        ).innerText =
-            money(benefits);
 
+const overtimePay =
+hourlyRate *
+Number(
+attendance.overtimeHours || 0
+) *
+overtimeRate;
 
-        document.getElementById(
-            "overtimePay"
-        ).innerText =
-            money(overtimePay);
 
+// =====================================
+// شب کاری
+// =====================================
 
-        document.getElementById(
-            "nightPay"
-        ).innerText =
-            money(nightPay);
+const nightRate =
+0.35;
 
 
-        document.getElementById(
-            "holidayPay"
-        ).innerText =
-            money(holidayPay);
+const nightPay =
+hourlyRate *
+Number(
+attendance.nightHours || 0
+) *
+nightRate;
 
 
-        document.getElementById(
-            "absenceDeduction"
-        ).innerText =
-            money(absenceDeduction);
+// =====================================
+// تعطیل کاری
+// =====================================
 
+const holidayRate =
+1.4;
 
-        document.getElementById(
-            "grossSalary"
-        ).innerText =
-            money(grossSalary);
 
+const holidayPay =
+hourlyRate *
+Number(
+attendance.holidayHours || 0
+) *
+holidayRate;
 
-        document.getElementById(
-            "netSalary"
-        ).innerText =
-            money(netSalary);
 
+// =====================================
+// غیبت
+// =====================================
 
-        // =====================================
-        // ساخت رکورد حقوق
-        // =====================================
+const dailyRate =
+monthDays > 0
+?
+baseSalary / monthDays
+:
+0;
 
-        const payroll = {
 
-            personnelCode:
-                personnelCode,
+const absenceDeduction =
+dailyRate *
+Number(
+attendance.absenceDays || 0
+);
 
-            employeeName:
-                employee.fullName,
 
-            month:
-                month,
+// =====================================
+// حقوق ناخالص
+// =====================================
 
-            baseSalary:
-                baseSalary,
+const grossSalary =
+baseSalary +
+benefits +
+overtimePay +
+nightPay +
+holidayPay -
+absenceDeduction;
 
-            benefits:
-                benefits,
 
-            overtimePay:
-                overtimePay,
+// =====================================
+// بیمه و مالیات
+// فعلاً صفر
+// =====================================
 
-            nightPay:
-                nightPay,
+const insurance =
+0;
 
-            holidayPay:
-                holidayPay,
 
-            absenceDeduction:
-                absenceDeduction,
+const tax =
+0;
 
-            grossSalary:
-                grossSalary,
 
-            insurance:
-                insurance,
+// =====================================
+// وام و مساعده
+// =====================================
 
-            tax:
-                tax,
+const deductions =
+getMonthlyDeductions(
+personnelCode,
+month
+);
 
-            loan:
-                loan,
 
-            advance:
-                advance,
+const loanDeduction =
+deductions.loanDeduction;
 
-            netSalary:
-                netSalary,
 
-            createdAt:
-                new Date().toISOString()
+const advanceDeduction =
+deductions.advanceDeduction;
 
-        };
 
+// =====================================
+// حقوق خالص
+// =====================================
 
-        // =====================================
-        // جلوگیری از ثبت تکراری
-        // =====================================
+const netSalary =
+grossSalary -
+insurance -
+tax -
+loanDeduction -
+advanceDeduction;
 
-        const duplicate =
-            payrollRecords.some(function(record) {
 
-                return record.personnelCode ===
-                    personnelCode &&
-                    record.month ===
-                    month;
+// =====================================
+// نمایش
+// =====================================
 
-            });
+document.getElementById(
+"resultBox"
+).style.display =
+"block";
 
 
-        if (!duplicate) {
+document.getElementById(
+"baseSalary"
+).innerText =
+money(baseSalary);
 
-            payrollRecords.push(payroll);
 
+document.getElementById(
+"benefits"
+).innerText =
+money(benefits);
 
-            localStorage.setItem(
-                "payrollRecords",
-                JSON.stringify(
-                    payrollRecords
-                )
-            );
 
-        }
+document.getElementById(
+"overtimePay"
+).innerText =
+money(overtimePay);
 
 
-        displayPayrolls();
+document.getElementById(
+"nightPay"
+).innerText =
+money(nightPay);
 
-    }
 
+document.getElementById(
+"holidayPay"
+).innerText =
+money(holidayPay);
 
-    // =========================================
-    // نمایش تاریخچه حقوق
-    // =========================================
 
-    function displayPayrolls() {
+document.getElementById(
+"absenceDeduction"
+).innerText =
+money(absenceDeduction);
 
-        const table =
-            document.getElementById(
-                "payrollTable"
-            );
 
+document.getElementById(
+"insurance"
+).innerText =
+money(insurance);
 
-        table.innerHTML = "";
 
+document.getElementById(
+"tax"
+).innerText =
+money(tax);
 
-        if (payrollRecords.length === 0) {
 
-            table.innerHTML = `
-                <tr>
-                    <td colspan="11" class="empty">
-                        هنوز حقوقی محاسبه نشده است.
-                    </td>
-                </tr>
-            `;
+document.getElementById(
+"loanDeduction"
+).innerText =
+money(loanDeduction);
 
-            return;
 
-        }
+document.getElementById(
+"advanceDeduction"
+).innerText =
+money(advanceDeduction);
 
 
-        payrollRecords.forEach(
-            function(record, index) {
+document.getElementById(
+"grossSalary"
+).innerText =
+money(grossSalary);
 
 
-                const row =
-                    document.createElement("tr");
+document.getElementById(
+"netSalary"
+).innerText =
+money(netSalary);
 
 
-                row.innerHTML = `
+// =====================================
+// ذخیره نتیجه
+// =====================================
 
-                    <td>
-                        ${record.employeeName}
-                    </td>
+const payroll = {
 
-                    <td>
-                        ${record.month}
-                    </td>
+personnelCode:
+personnelCode,
 
-                    <td>
-                        ${money(record.baseSalary)}
-                    </td>
+employeeName:
+employee.fullName,
 
-                    <td>
-                        ${money(record.benefits)}
-                    </td>
+month:
+month,
 
-                    <td>
-                        ${money(record.overtimePay)}
-                    </td>
+baseSalary:
+baseSalary,
 
-                    <td>
-                        ${money(record.nightPay)}
-                    </td>
+benefits:
+benefits,
 
-                    <td>
-                        ${money(record.holidayPay)}
-                    </td>
+overtimePay:
+overtimePay,
 
-                    <td>
-                        ${money(record.absenceDeduction)}
-                    </td>
+nightPay:
+nightPay,
 
-                    <td>
-                        ${money(record.grossSalary)}
-                    </td>
+holidayPay:
+holidayPay,
 
-                    <td>
-                        ${money(record.netSalary)}
-                    </td>
+absenceDeduction:
+absenceDeduction,
 
-                    <td>
+insurance:
+insurance,
 
-                        <button
-                            class="delete-btn"
-                            onclick="deletePayroll(${index})"
-                        >
-                            حذف
-                        </button>
+tax:
+tax,
 
-                    </td>
+loan:
+loanDeduction,
 
-                `;
+advance:
+advanceDeduction,
 
+grossSalary:
+grossSalary,
 
-                table.appendChild(row);
+netSalary:
+netSalary,
 
-            }
-        );
+createdAt:
+new Date().toISOString()
 
-    }
+};
 
 
-    // =========================================
-    // حذف حقوق
-    // =========================================
+// =====================================
+// اگر قبلاً وجود دارد، بروزرسانی شود
+// =====================================
 
-    function deletePayroll(index) {
+const existingIndex =
+payrollRecords.findIndex(
+function(record) {
 
+return record.personnelCode ===
+personnelCode &&
+record.month ===
+month;
 
-        if (
-            !confirm(
-                "آیا از حذف این محاسبه حقوق مطمئن هستید؟"
-            )
-        ) {
+});
 
-            return;
 
-        }
+if (existingIndex >= 0) {
 
+payrollRecords[
+existingIndex
+] = payroll;
 
-        payrollRecords.splice(
-            index,
-            1
-        );
+}
+else {
 
+payrollRecords.push(
+payroll
+);
 
-        localStorage.setItem(
-            "payrollRecords",
-            JSON.stringify(
-                payrollRecords
-            )
-        );
+}
 
 
-        displayPayrolls();
+localStorage.setItem(
+"payrollRecords",
+JSON.stringify(
+payrollRecords
+)
+);
 
-    }
 
+// =====================================
+// نمایش تاریخچه
+// =====================================
 
-    // =========================================
-    // صفحه اصلی
-    // =========================================
+displayPayrolls();
 
-    function goHome() {
 
-        window.location.href =
-            "index.html";
+// =====================================
+// پیام
+// =====================================
 
-    }
+alert(
+"حقوق با موفقیت محاسبه و ذخیره شد."
+);
 
+}
 
-    // =========================================
-    // اجرای اولیه
-    // =========================================
 
-    loadEmployees();
+// =====================================
+// نمایش تاریخچه
+// =====================================
 
-    displayPayrolls();
+function displayPayrolls() {
+
+
+const table =
+document.getElementById(
+"payrollTable"
+);
+
+
+table.innerHTML = "";
+
+
+if (
+payrollRecords.length === 0
+) {
+
+table.innerHTML = `
+
+<tr>
+
+<td
+colspan="13"
+class="empty"
+>
+
+هنوز حقوقی محاسبه نشده است.
+
+</td>
+
+</tr>
+
+`;
+
+return;
+
+}
+
+
+payrollRecords.forEach(
+function(record, index) {
+
+
+const row =
+document.createElement("tr");
+
+
+row.innerHTML = `
+
+<td>
+${record.employeeName}
+</td>
+
+<td>
+${record.month}
+</td>
+
+<td>
+${money(record.baseSalary)}
+</td>
+
+<td>
+${money(record.benefits)}
+</td>
+
+<td>
+${money(record.overtimePay)}
+</td>
+
+<td>
+${money(record.nightPay)}
+</td>
+
+<td>
+${money(record.holidayPay)}
+</td>
+
+<td>
+${money(record.absenceDeduction)}
+</td>
+
+<td>
+${money(record.loan)}
+</td>
+
+<td>
+${money(record.advance)}
+</td>
+
+<td>
+${money(record.grossSalary)}
+</td>
+
+<td>
+${money(record.netSalary)}
+</td>
+
+<td>
+
+<button
+class="delete-btn"
+onclick="deletePayroll(${index})"
+>
+حذف
+</button>
+
+</td>
+
+`;
+
+table.appendChild(row);
+
+});
+
+}
+
+
+// =====================================
+// حذف
+// =====================================
+
+function deletePayroll(index) {
+
+
+if (
+!confirm(
+"آیا از حذف این محاسبه حقوق مطمئن هستید؟"
+)
+) {
+
+return;
+
+}
+
+
+payrollRecords.splice(
+index,
+1
+);
+
+
+localStorage.setItem(
+"payrollRecords",
+JSON.stringify(
+payrollRecords
+)
+);
+
+
+displayPayrolls();
+
+}
+
+
+// =====================================
+// صفحه اصلی
+// =====================================
+
+function goHome() {
+
+window.location.href =
+"index.html";
+
+}
+
+
+// =====================================
+// اجرای اولیه
+// =====================================
+
+loadEmployees();
+
+displayPayrolls();
 
 
 </script>
@@ -1213,4 +1508,3 @@
 </body>
 
 </html>
-```
