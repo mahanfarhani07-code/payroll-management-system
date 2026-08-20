@@ -2,11 +2,8 @@
 <html lang="fa" dir="rtl">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>تنظیمات حقوق و دستمزد</title>
 
@@ -21,7 +18,7 @@ content="width=device-width, initial-scale=1.0">
 body {
     font-family: Tahoma, Arial, sans-serif;
     background: #0f172a;
-    color: white;
+    color: #fff;
     min-height: 100vh;
 }
 
@@ -33,6 +30,7 @@ body {
 }
 
 .header h1 {
+    font-size: 28px;
     margin-bottom: 10px;
 }
 
@@ -51,11 +49,6 @@ body {
     border: 1px solid #334155;
     border-radius: 20px;
     padding: 28px;
-    margin-bottom: 25px;
-}
-
-.box h2 {
-    margin-bottom: 22px;
 }
 
 .info {
@@ -66,6 +59,20 @@ body {
     line-height: 2;
     margin-bottom: 25px;
     border-radius: 8px;
+}
+
+.card {
+    background: #172033;
+    border: 1px solid #334155;
+    border-radius: 15px;
+    padding: 22px;
+    margin-bottom: 25px;
+}
+
+.section-title {
+    color: #38bdf8;
+    margin-bottom: 20px;
+    font-size: 19px;
 }
 
 .form-grid {
@@ -82,38 +89,86 @@ body {
 label {
     color: #cbd5e1;
     margin-bottom: 8px;
+    font-size: 14px;
 }
 
-input,
-select {
-    padding: 13px;
-    border-radius: 10px;
-    border: 1px solid #475569;
+/* کادر مبلغ */
+
+.money-box {
+    position: relative;
+    display: flex;
+    align-items: center;
     background: #0f172a;
-    color: white;
-    font-family: inherit;
+    border: 1px solid #475569;
+    border-radius: 11px;
+    min-height: 52px;
+    transition: 0.2s;
 }
 
-input:focus,
-select:focus {
-    outline: none;
+.money-box:focus-within {
     border-color: #38bdf8;
+    box-shadow: 0 0 0 2px rgba(56,189,248,0.08);
 }
 
-/* متن مبلغ به حروف */
+.money-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 16px;
+    padding: 14px 65px 14px 14px;
+    text-align: right;
+    direction: ltr;
+}
+
+.money-input::placeholder {
+    color: #64748b;
+}
+
+.money-unit {
+    position: absolute;
+    right: 12px;
+    color: #94a3b8;
+    font-size: 13px;
+    pointer-events: none;
+}
+
+/* مبلغ به حروف */
 
 .price-words {
     color: #64748b;
     font-size: 12px;
     line-height: 1.8;
-    min-height: 22px;
-    margin-top: 6px;
+    min-height: 23px;
+    margin-top: 5px;
+    padding-right: 3px;
 }
 
-.unit {
+.unit-small {
     color: #64748b;
     font-size: 11px;
-    margin-top: 3px;
+    margin-top: 2px;
+}
+
+/* ورودی‌های معمولی */
+
+.normal-input,
+select {
+    width: 100%;
+    padding: 13px;
+    border-radius: 10px;
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: white;
+    font-family: Tahoma, Arial, sans-serif;
+    outline: none;
+}
+
+.normal-input:focus,
+select:focus {
+    border-color: #38bdf8;
 }
 
 .buttons {
@@ -127,9 +182,15 @@ button {
     border-radius: 10px;
     padding: 13px 22px;
     color: white;
-    font-family: inherit;
+    font-family: Tahoma, Arial, sans-serif;
     cursor: pointer;
     font-size: 15px;
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.1);
 }
 
 .save-btn {
@@ -144,11 +205,6 @@ button {
     background: #475569;
 }
 
-button:hover {
-    filter: brightness(1.1);
-    transform: translateY(-1px);
-}
-
 .success {
     display: none;
     background: #064e3b;
@@ -159,19 +215,7 @@ button:hover {
     border-radius: 8px;
 }
 
-.section-title {
-    color: #38bdf8;
-    margin-bottom: 18px;
-    font-size: 18px;
-}
-
-.card {
-    background: #172033;
-    border: 1px solid #334155;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 25px;
-}
+/* موبایل */
 
 @media (max-width: 900px) {
 
@@ -183,6 +227,14 @@ button:hover {
 
 @media (max-width: 600px) {
 
+    .container {
+        width: 96%;
+    }
+
+    .box {
+        padding: 16px;
+    }
+
     .form-grid {
         grid-template-columns: 1fr;
     }
@@ -191,21 +243,22 @@ button:hover {
         flex-direction: column;
     }
 
+    .header h1 {
+        font-size: 22px;
+    }
+
 }
 
 </style>
 
 </head>
 
-
 <body>
 
 
 <header class="header">
 
-<h1>
-⚙️ تنظیمات حقوق و دستمزد
-</h1>
+<h1>⚙️ تنظیمات حقوق و دستمزد</h1>
 
 <p>
 تنظیم قوانین و مقادیر مورد استفاده در محاسبه حقوق
@@ -216,21 +269,21 @@ button:hover {
 
 <div class="container">
 
-
 <section class="box">
 
 
 <div class="info">
 
 از این قسمت می‌توانید مقادیر پیش‌فرض سیستم را تنظیم کنید.
-مبالغ واردشده در قسمت‌های مالی، به‌صورت خودکار به حروف فارسی نمایش داده می‌شوند.
+واحد تمام مبالغ این سیستم <strong>ریال</strong> است.
+هنگام وارد کردن مبلغ، عدد به‌صورت خودکار سه‌رقمی جدا شده و مبلغ به حروف نمایش داده می‌شود.
 
 </div>
 
 
-<!-- =========================
+<!-- ==============================
      حقوق و مزایا
-========================= -->
+================================ -->
 
 <div class="card">
 
@@ -242,163 +295,194 @@ button:hover {
 <div class="form-grid">
 
 
+<!-- حقوق پایه -->
+
 <div class="input-group">
 
-<label>
-حقوق پایه پیش‌فرض
-</label>
+<label>حقوق پایه پیش‌فرض</label>
+
+<div class="money-box">
+
+<span class="money-unit">ریال</span>
 
 <input
-type="number"
+type="text"
+inputmode="numeric"
+class="money-input"
 id="baseSalary"
-min="0"
-placeholder="مثلاً 100000000"
+data-money="true"
+placeholder="مثلاً ۱۰۰٬۰۰۰٬۰۰۰"
+autocomplete="off"
 >
+
+</div>
 
 <div
 class="price-words"
-id="baseSalaryWords"
-></div>
-
-<span class="unit">
-ریال
-</span>
+id="baseSalaryWords">
+</div>
 
 </div>
 
 
+<!-- حق مسکن -->
+
 <div class="input-group">
 
-<label>
-حق مسکن
-</label>
+<label>حق مسکن</label>
+
+<div class="money-box">
+
+<span class="money-unit">ریال</span>
 
 <input
-type="number"
+type="text"
+inputmode="numeric"
+class="money-input"
 id="housing"
-min="0"
+data-money="true"
 placeholder="مبلغ حق مسکن"
+autocomplete="off"
 >
+
+</div>
 
 <div
 class="price-words"
-id="housingWords"
-></div>
-
-<span class="unit">
-ریال
-</span>
+id="housingWords">
+</div>
 
 </div>
 
 
+<!-- بن -->
+
 <div class="input-group">
 
-<label>
-بن کارگری
-</label>
+<label>بن کارگری</label>
+
+<div class="money-box">
+
+<span class="money-unit">ریال</span>
 
 <input
-type="number"
+type="text"
+inputmode="numeric"
+class="money-input"
 id="food"
-min="0"
+data-money="true"
 placeholder="مبلغ بن"
+autocomplete="off"
 >
+
+</div>
 
 <div
 class="price-words"
-id="foodWords"
-></div>
-
-<span class="unit">
-ریال
-</span>
+id="foodWords">
+</div>
 
 </div>
 
 
+<!-- تأهل -->
+
 <div class="input-group">
 
-<label>
-حق تأهل
-</label>
+<label>حق تأهل</label>
+
+<div class="money-box">
+
+<span class="money-unit">ریال</span>
 
 <input
-type="number"
+type="text"
+inputmode="numeric"
+class="money-input"
 id="marriage"
-min="0"
+data-money="true"
 placeholder="مبلغ حق تأهل"
+autocomplete="off"
 >
+
+</div>
 
 <div
 class="price-words"
-id="marriageWords"
-></div>
-
-<span class="unit">
-ریال
-</span>
+id="marriageWords">
+</div>
 
 </div>
 
 
+<!-- اولاد -->
+
 <div class="input-group">
 
-<label>
-حق اولاد
-</label>
+<label>حق اولاد</label>
+
+<div class="money-box">
+
+<span class="money-unit">ریال</span>
 
 <input
-type="number"
+type="text"
+inputmode="numeric"
+class="money-input"
 id="child"
-min="0"
+data-money="true"
 placeholder="مبلغ برای هر فرزند"
+autocomplete="off"
 >
-
-<div
-class="price-words"
-id="childWords"
-></div>
-
-<span class="unit">
-ریال
-</span>
 
 </div>
 
+<div
+class="price-words"
+id="childWords">
+</div>
+
+</div>
+
+
+<!-- سایر مزایا -->
 
 <div class="input-group">
 
-<label>
-سایر مزایا
-</label>
+<label>سایر مزایا</label>
+
+<div class="money-box">
+
+<span class="money-unit">ریال</span>
 
 <input
-type="number"
+type="text"
+inputmode="numeric"
+class="money-input"
 id="otherBenefits"
-min="0"
+data-money="true"
 placeholder="سایر مزایا"
+autocomplete="off"
 >
+
+</div>
 
 <div
 class="price-words"
-id="otherBenefitsWords"
-></div>
-
-<span class="unit">
-ریال
-</span>
-
-</div>
-
+id="otherBenefitsWords">
 </div>
 
 </div>
 
 
-<!-- =========================
+</div>
+
+</div>
+
+
+<!-- ==============================
      کارکرد
-========================= -->
+================================ -->
 
 <div class="card">
 
@@ -412,18 +496,17 @@ id="otherBenefitsWords"
 
 <div class="input-group">
 
-<label>
-ساعات کار موظفی ماهانه
-</label>
+<label>ساعات کار موظفی ماهانه</label>
 
 <input
 type="number"
 id="monthlyHours"
+class="normal-input"
 min="1"
 value="176"
 >
 
-<span class="unit">
+<span class="unit-small">
 ساعت
 </span>
 
@@ -432,19 +515,18 @@ value="176"
 
 <div class="input-group">
 
-<label>
-ضریب اضافه‌کاری
-</label>
+<label>ضریب اضافه‌کاری</label>
 
 <input
 type="number"
 id="overtimeRate"
+class="normal-input"
 min="0"
 step="0.01"
 value="1.4"
 >
 
-<span class="unit">
+<span class="unit-small">
 ضریب
 </span>
 
@@ -453,19 +535,18 @@ value="1.4"
 
 <div class="input-group">
 
-<label>
-ضریب شب‌کاری
-</label>
+<label>ضریب شب‌کاری</label>
 
 <input
 type="number"
 id="nightRate"
+class="normal-input"
 min="0"
 step="0.01"
 value="1.35"
 >
 
-<span class="unit">
+<span class="unit-small">
 ضریب
 </span>
 
@@ -474,19 +555,18 @@ value="1.35"
 
 <div class="input-group">
 
-<label>
-ضریب تعطیل‌کاری
-</label>
+<label>ضریب تعطیل‌کاری</label>
 
 <input
 type="number"
 id="holidayRate"
+class="normal-input"
 min="0"
 step="0.01"
 value="1.4"
 >
 
-<span class="unit">
+<span class="unit-small">
 ضریب
 </span>
 
@@ -495,19 +575,18 @@ value="1.4"
 
 <div class="input-group">
 
-<label>
-ضریب مأموریت
-</label>
+<label>ضریب مأموریت</label>
 
 <input
 type="number"
 id="missionRate"
+class="normal-input"
 min="0"
 step="0.01"
 value="1"
 >
 
-<span class="unit">
+<span class="unit-small">
 ضریب
 </span>
 
@@ -516,13 +595,12 @@ value="1"
 
 <div class="input-group">
 
-<label>
-ساعت شروع کار
-</label>
+<label>ساعت شروع کار</label>
 
 <input
 type="time"
 id="workStart"
+class="normal-input"
 value="08:00"
 >
 
@@ -531,13 +609,12 @@ value="08:00"
 
 <div class="input-group">
 
-<label>
-ساعت پایان کار
-</label>
+<label>ساعت پایان کار</label>
 
 <input
 type="time"
 id="workEnd"
+class="normal-input"
 value="16:00"
 >
 
@@ -549,9 +626,9 @@ value="16:00"
 </div>
 
 
-<!-- =========================
+<!-- ==============================
      بیمه و مالیات
-========================= -->
+================================ -->
 
 <div class="card">
 
@@ -565,20 +642,19 @@ value="16:00"
 
 <div class="input-group">
 
-<label>
-درصد بیمه سهم کارمند
-</label>
+<label>درصد بیمه سهم کارمند</label>
 
 <input
 type="number"
 id="insuranceRate"
+class="normal-input"
 min="0"
 max="100"
 step="0.01"
 value="7"
 >
 
-<span class="unit">
+<span class="unit-small">
 درصد
 </span>
 
@@ -587,20 +663,19 @@ value="7"
 
 <div class="input-group">
 
-<label>
-درصد بیمه سهم کارفرما
-</label>
+<label>درصد بیمه سهم کارفرما</label>
 
 <input
 type="number"
 id="employerInsuranceRate"
+class="normal-input"
 min="0"
 max="100"
 step="0.01"
 value="23"
 >
 
-<span class="unit">
+<span class="unit-small">
 درصد
 </span>
 
@@ -609,58 +684,63 @@ value="23"
 
 <div class="input-group">
 
-<label>
-درصد مالیات پیش‌فرض
-</label>
+<label>درصد مالیات پیش‌فرض</label>
 
 <input
 type="number"
 id="taxRate"
+class="normal-input"
 min="0"
 max="100"
 step="0.01"
 value="10"
 >
 
-<span class="unit">
+<span class="unit-small">
 درصد
 </span>
 
 </div>
 
 
+<!-- سقف مالیات -->
+
 <div class="input-group">
 
-<label>
-سقف معافیت مالیاتی ماهانه
-</label>
+<label>سقف معافیت مالیاتی ماهانه</label>
+
+<div class="money-box">
+
+<span class="money-unit">ریال</span>
 
 <input
-type="number"
+type="text"
+inputmode="numeric"
+class="money-input"
 id="taxFreeLimit"
-min="0"
+data-money="true"
 placeholder="مبلغ معافیت"
+autocomplete="off"
 >
+
+</div>
 
 <div
 class="price-words"
-id="taxFreeLimitWords"
-></div>
-
-<span class="unit">
-ریال
-</span>
-
-</div>
-
+id="taxFreeLimitWords">
 </div>
 
 </div>
 
 
-<!-- =========================
+</div>
+
+</div>
+
+
+<!-- ==============================
      سایر تنظیمات
-========================= -->
+================================ -->
 
 <div class="card">
 
@@ -674,18 +754,12 @@ id="taxFreeLimitWords"
 
 <div class="input-group">
 
-<label>
-واحد پول
-</label>
+<label>واحد پول</label>
 
 <select id="currency">
 
-<option value="ریال">
+<option value="ریال" selected>
 ریال
-</option>
-
-<option value="تومان">
-تومان
 </option>
 
 </select>
@@ -695,19 +769,18 @@ id="taxFreeLimitWords"
 
 <div class="input-group">
 
-<label>
-روزهای کاری ماه
-</label>
+<label>روزهای کاری ماه</label>
 
 <input
 type="number"
 id="workingDays"
+class="normal-input"
 min="1"
 max="31"
 value="26"
 >
 
-<span class="unit">
+<span class="unit-small">
 روز
 </span>
 
@@ -716,51 +789,52 @@ value="26"
 
 <div class="input-group">
 
-<label>
-تعداد روزهای ماه
-</label>
+<label>تعداد روزهای ماه</label>
 
 <input
 type="number"
 id="monthDays"
+class="normal-input"
 min="1"
 max="31"
 value="30"
 >
 
-<span class="unit">
+<span class="unit-small">
 روز
 </span>
 
 </div>
 
-</div>
 
 </div>
 
+</div>
+
+
+<!-- ==============================
+     دکمه‌ها
+================================ -->
 
 <div class="buttons">
 
 <button
 class="save-btn"
-onclick="saveSettings()"
->
+onclick="saveSettings()">
 💾 ذخیره تنظیمات
 </button>
 
 
 <button
 class="reset-btn"
-onclick="resetSettings()"
->
+onclick="resetSettings()">
 🔄 بازگردانی پیش‌فرض
 </button>
 
 
 <button
 class="home-btn"
-onclick="goHome()"
->
+onclick="goHome()">
 🏠 صفحه اصلی
 </button>
 
@@ -769,154 +843,214 @@ onclick="goHome()"
 
 <div
 class="success"
-id="success"
->
+id="success">
+
 ✅ تنظیمات با موفقیت ذخیره شد.
+
 </div>
 
 
 </section>
 
-
 </div>
-
 
 
 <script>
 
 
-/* =====================================
+/* =========================================
    کلید ذخیره
-===================================== */
+========================================= */
 
-const SETTINGS_KEY =
-"payrollSettings";
-
+const SETTINGS_KEY = "payrollSettings";
 
 
-/* =====================================
-   تبدیل عدد به حروف فارسی
-===================================== */
+/* =========================================
+   تبدیل اعداد فارسی و عربی به انگلیسی
+========================================= */
+
+function convertDigits(value) {
+
+    return String(value)
+
+        .replace(/[۰-۹]/g, function(digit) {
+
+            return "۰۱۲۳۴۵۶۷۸۹".indexOf(digit);
+
+        })
+
+        .replace(/[٠-٩]/g, function(digit) {
+
+            return "٠١٢٣٤٥٦٧٨٩".indexOf(digit);
+
+        });
+
+}
+
+
+/* =========================================
+   گرفتن عدد واقعی
+========================================= */
+
+function getNumericValue(value) {
+
+    value = convertDigits(value);
+
+    value = value.replace(/[^0-9]/g, "");
+
+    if (!value) {
+        return 0;
+    }
+
+    return Number(value);
+
+}
+
+
+/* =========================================
+   تبدیل عدد به شکل سه رقمی فارسی
+========================================= */
+
+function formatMoney(value) {
+
+    let number = getNumericValue(value);
+
+    if (!number) {
+        return "";
+    }
+
+    return number
+        .toLocaleString("fa-IR");
+}
+
+
+/* =========================================
+   واحدهای عدد
+========================================= */
 
 const ones = [
-"",
-"یک",
-"دو",
-"سه",
-"چهار",
-"پنج",
-"شش",
-"هفت",
-"هشت",
-"نه"
+    "",
+    "یک",
+    "دو",
+    "سه",
+    "چهار",
+    "پنج",
+    "شش",
+    "هفت",
+    "هشت",
+    "نه"
 ];
 
 
 const teens = [
-"ده",
-"یازده",
-"دوازده",
-"سیزده",
-"چهارده",
-"پانزده",
-"شانزده",
-"هفده",
-"هجده",
-"نوزده"
+    "ده",
+    "یازده",
+    "دوازده",
+    "سیزده",
+    "چهارده",
+    "پانزده",
+    "شانزده",
+    "هفده",
+    "هجده",
+    "نوزده"
 ];
 
 
 const tens = [
-"",
-"",
-"بیست",
-"سی",
-"چهل",
-"پنجاه",
-"شصت",
-"هفتاد",
-"هشتاد",
-"نود"
+    "",
+    "",
+    "بیست",
+    "سی",
+    "چهل",
+    "پنجاه",
+    "شصت",
+    "هفتاد",
+    "هشتاد",
+    "نود"
 ];
 
 
 const hundreds = [
-"",
-"صد",
-"دویست",
-"سیصد",
-"چهارصد",
-"پانصد",
-"ششصد",
-"هفتصد",
-"هشتصد",
-"نهصد"
+    "",
+    "صد",
+    "دویست",
+    "سیصد",
+    "چهارصد",
+    "پانصد",
+    "ششصد",
+    "هفتصد",
+    "هشتصد",
+    "نهصد"
 ];
 
 
 const scales = [
-"",
-"هزار",
-"میلیون",
-"میلیارد",
-"تریلیون",
-"کوادریلیون"
+    "",
+    "هزار",
+    "میلیون",
+    "میلیارد",
+    "تریلیون",
+    "کوادریلیون"
 ];
 
 
-function threeDigitsToWords(num) {
+/* =========================================
+   تبدیل سه رقم به حروف
+========================================= */
+
+function threeDigitsToWords(number) {
 
     let result = [];
 
-    let h =
-        Math.floor(num / 100);
+    let hundred =
+        Math.floor(number / 100);
 
     let remainder =
-        num % 100;
+        number % 100;
 
 
-    if (h > 0) {
+    if (hundred > 0) {
 
         result.push(
-            hundreds[h]
+            hundreds[hundred]
         );
 
     }
 
 
-    if (remainder >= 10 &&
-        remainder <= 19) {
+    if (
+        remainder >= 10 &&
+        remainder <= 19
+    ) {
 
         result.push(
             teens[remainder - 10]
         );
 
-    }
+    } else {
 
-    else {
-
-        let t =
+        let ten =
             Math.floor(
                 remainder / 10
             );
 
-        let o =
+        let one =
             remainder % 10;
 
 
-        if (t > 0) {
+        if (ten > 0) {
 
             result.push(
-                tens[t]
+                tens[ten]
             );
 
         }
 
 
-        if (o > 0) {
+        if (one > 0) {
 
             result.push(
-                ones[o]
+                ones[one]
             );
 
         }
@@ -929,6 +1063,9 @@ function threeDigitsToWords(num) {
 }
 
 
+/* =========================================
+   عدد به حروف فارسی
+========================================= */
 
 function numberToPersianWords(number) {
 
@@ -951,14 +1088,14 @@ function numberToPersianWords(number) {
     if (number < 0) {
 
         return "منفی " +
-        numberToPersianWords(
-            Math.abs(number)
-        );
+            numberToPersianWords(
+                Math.abs(number)
+            );
 
     }
 
 
-    let parts = [];
+    let result = [];
 
     let scaleIndex = 0;
 
@@ -982,13 +1119,13 @@ function numberToPersianWords(number) {
             ) {
 
                 words +=
-                " " +
-                scales[scaleIndex];
+                    " " +
+                    scales[scaleIndex];
 
             }
 
 
-            parts.unshift(words);
+            result.unshift(words);
 
         }
 
@@ -1004,19 +1141,18 @@ function numberToPersianWords(number) {
     }
 
 
-    return parts.join(" و ");
+    return result.join(" و ");
 
 }
 
 
+/* =========================================
+   اتصال فیلد مبلغ
+========================================= */
 
-/* =====================================
-   نمایش مبلغ به حروف
-===================================== */
-
-function updatePriceWords(
+function setupMoneyField(
     inputId,
-    outputId
+    wordsId
 ) {
 
     const input =
@@ -1024,305 +1160,71 @@ function updatePriceWords(
             inputId
         );
 
-    const output =
+    const words =
         document.getElementById(
-            outputId
+            wordsId
         );
 
 
-    if (!input || !output) {
+    if (!input || !words) {
         return;
-    }
-
-
-    function update() {
-
-        const value =
-            Number(
-                input.value
-            );
-
-
-        if (
-            !input.value ||
-            value === 0
-        ) {
-
-            output.innerText = "";
-
-            return;
-
-        }
-
-
-        output.innerText =
-            numberToPersianWords(
-                value
-            )
-            +
-            " ریال";
-
     }
 
 
     input.addEventListener(
         "input",
-        update
-    );
+        function() {
 
-
-    update();
-
-}
-
-
-
-/* =====================================
-   فعال کردن تبدیل برای مبالغ
-===================================== */
-
-updatePriceWords(
-    "baseSalary",
-    "baseSalaryWords"
-);
-
-updatePriceWords(
-    "housing",
-    "housingWords"
-);
-
-updatePriceWords(
-    "food",
-    "foodWords"
-);
-
-updatePriceWords(
-    "marriage",
-    "marriageWords"
-);
-
-updatePriceWords(
-    "child",
-    "childWords"
-);
-
-updatePriceWords(
-    "otherBenefits",
-    "otherBenefitsWords"
-);
-
-updatePriceWords(
-    "taxFreeLimit",
-    "taxFreeLimitWords"
-);
-
-
-
-/* =====================================
-   بارگذاری تنظیمات
-===================================== */
-
-function loadSettings() {
-
-
-    const settings =
-        JSON.parse(
-            localStorage.getItem(
-                SETTINGS_KEY
-            )
-        );
-
-
-    if (!settings) {
-        return;
-    }
-
-
-    document.getElementById(
-        "baseSalary"
-    ).value =
-        settings.baseSalary || "";
-
-
-    document.getElementById(
-        "housing"
-    ).value =
-        settings.housing || "";
-
-
-    document.getElementById(
-        "food"
-    ).value =
-        settings.food || "";
-
-
-    document.getElementById(
-        "marriage"
-    ).value =
-        settings.marriage || "";
-
-
-    document.getElementById(
-        "child"
-    ).value =
-        settings.child || "";
-
-
-    document.getElementById(
-        "otherBenefits"
-    ).value =
-        settings.otherBenefits || "";
-
-
-    document.getElementById(
-        "monthlyHours"
-    ).value =
-        settings.monthlyHours || 176;
-
-
-    document.getElementById(
-        "overtimeRate"
-    ).value =
-        settings.overtimeRate || 1.4;
-
-
-    document.getElementById(
-        "nightRate"
-    ).value =
-        settings.nightRate || 1.35;
-
-
-    document.getElementById(
-        "holidayRate"
-    ).value =
-        settings.holidayRate || 1.4;
-
-
-    document.getElementById(
-        "missionRate"
-    ).value =
-        settings.missionRate || 1;
-
-
-    document.getElementById(
-        "workStart"
-    ).value =
-        settings.workStart || "08:00";
-
-
-    document.getElementById(
-        "workEnd"
-    ).value =
-        settings.workEnd || "16:00";
-
-
-    document.getElementById(
-        "insuranceRate"
-    ).value =
-        settings.insuranceRate || 7;
-
-
-    document.getElementById(
-        "employerInsuranceRate"
-    ).value =
-        settings.employerInsuranceRate || 23;
-
-
-    document.getElementById(
-        "taxRate"
-    ).value =
-        settings.taxRate || 10;
-
-
-    document.getElementById(
-        "taxFreeLimit"
-    ).value =
-        settings.taxFreeLimit || "";
-
-
-    document.getElementById(
-        "currency"
-    ).value =
-        settings.currency || "ریال";
-
-
-    document.getElementById(
-        "workingDays"
-    ).value =
-        settings.workingDays || 26;
-
-
-    document.getElementById(
-        "monthDays"
-    ).value =
-        settings.monthDays || 30;
-
-
-    /*
-       به‌روزرسانی متن حروف
-    */
-
-    updateAllPriceWords();
-
-}
-
-
-
-/* =====================================
-   به‌روزرسانی همه مبالغ
-===================================== */
-
-function updateAllPriceWords() {
-
-    const fields = [
-
-        ["baseSalary", "baseSalaryWords"],
-
-        ["housing", "housingWords"],
-
-        ["food", "foodWords"],
-
-        ["marriage", "marriageWords"],
-
-        ["child", "childWords"],
-
-        ["otherBenefits", "otherBenefitsWords"],
-
-        ["taxFreeLimit", "taxFreeLimitWords"]
-
-    ];
-
-
-    fields.forEach(function(item) {
-
-        const input =
-            document.getElementById(
-                item[0]
-            );
-
-        const output =
-            document.getElementById(
-                item[1]
-            );
-
-
-        if (
-            input &&
-            output &&
-            input.value
-        ) {
-
-            const value =
-                Number(
+            const raw =
+                getNumericValue(
                     input.value
                 );
 
 
-            if (value > 0) {
+            if (!raw) {
 
-                output.innerText =
+                input.value = "";
+
+                words.innerText = "";
+
+                return;
+
+            }
+
+
+            input.value =
+                formatMoney(raw);
+
+
+            words.innerText =
+                numberToPersianWords(
+                    raw
+                )
+                +
+                " ریال";
+
+        }
+    );
+
+
+    input.addEventListener(
+        "blur",
+        function() {
+
+            const raw =
+                getNumericValue(
+                    input.value
+                );
+
+
+            if (raw) {
+
+                input.value =
+                    formatMoney(raw);
+
+                words.innerText =
                     numberToPersianWords(
-                        value
+                        raw
                     )
                     +
                     " ریال";
@@ -1330,16 +1232,277 @@ function updateAllPriceWords() {
             }
 
         }
-
-    });
+    );
 
 }
 
 
+/* =========================================
+   فعال کردن فیلدهای مبلغ
+========================================= */
 
-/* =====================================
+setupMoneyField(
+    "baseSalary",
+    "baseSalaryWords"
+);
+
+
+setupMoneyField(
+    "housing",
+    "housingWords"
+);
+
+
+setupMoneyField(
+    "food",
+    "foodWords"
+);
+
+
+setupMoneyField(
+    "marriage",
+    "marriageWords"
+);
+
+
+setupMoneyField(
+    "child",
+    "childWords"
+);
+
+
+setupMoneyField(
+    "otherBenefits",
+    "otherBenefitsWords"
+);
+
+
+setupMoneyField(
+    "taxFreeLimit",
+    "taxFreeLimitWords"
+);
+
+
+/* =========================================
+   تنظیم مقدار فیلد مبلغ
+========================================= */
+
+function setMoneyField(
+    inputId,
+    wordsId,
+    value
+) {
+
+    const input =
+        document.getElementById(
+            inputId
+        );
+
+    const words =
+        document.getElementById(
+            wordsId
+        );
+
+
+    if (!input || !words) {
+        return;
+    }
+
+
+    const number =
+        Number(value) || 0;
+
+
+    if (number === 0) {
+
+        input.value = "";
+
+        words.innerText = "";
+
+        return;
+
+    }
+
+
+    input.value =
+        formatMoney(number);
+
+
+    words.innerText =
+        numberToPersianWords(
+            number
+        )
+        +
+        " ریال";
+
+}
+
+
+/* =========================================
+   بارگذاری تنظیمات
+========================================= */
+
+function loadSettings() {
+
+    const saved =
+        localStorage.getItem(
+            SETTINGS_KEY
+        );
+
+
+    if (!saved) {
+        return;
+    }
+
+
+    try {
+
+        const settings =
+            JSON.parse(saved);
+
+
+        setMoneyField(
+            "baseSalary",
+            "baseSalaryWords",
+            settings.baseSalary
+        );
+
+
+        setMoneyField(
+            "housing",
+            "housingWords",
+            settings.housing
+        );
+
+
+        setMoneyField(
+            "food",
+            "foodWords",
+            settings.food
+        );
+
+
+        setMoneyField(
+            "marriage",
+            "marriageWords",
+            settings.marriage
+        );
+
+
+        setMoneyField(
+            "child",
+            "childWords",
+            settings.child
+        );
+
+
+        setMoneyField(
+            "otherBenefits",
+            "otherBenefitsWords",
+            settings.otherBenefits
+        );
+
+
+        setMoneyField(
+            "taxFreeLimit",
+            "taxFreeLimitWords",
+            settings.taxFreeLimit
+        );
+
+
+        document.getElementById(
+            "monthlyHours"
+        ).value =
+            settings.monthlyHours || 176;
+
+
+        document.getElementById(
+            "overtimeRate"
+        ).value =
+            settings.overtimeRate || 1.4;
+
+
+        document.getElementById(
+            "nightRate"
+        ).value =
+            settings.nightRate || 1.35;
+
+
+        document.getElementById(
+            "holidayRate"
+        ).value =
+            settings.holidayRate || 1.4;
+
+
+        document.getElementById(
+            "missionRate"
+        ).value =
+            settings.missionRate || 1;
+
+
+        document.getElementById(
+            "workStart"
+        ).value =
+            settings.workStart || "08:00";
+
+
+        document.getElementById(
+            "workEnd"
+        ).value =
+            settings.workEnd || "16:00";
+
+
+        document.getElementById(
+            "insuranceRate"
+        ).value =
+            settings.insuranceRate || 7;
+
+
+        document.getElementById(
+            "employerInsuranceRate"
+        ).value =
+            settings.employerInsuranceRate || 23;
+
+
+        document.getElementById(
+            "taxRate"
+        ).value =
+            settings.taxRate || 10;
+
+
+        document.getElementById(
+            "currency"
+        ).value =
+            "ریال";
+
+
+        document.getElementById(
+            "workingDays"
+        ).value =
+            settings.workingDays || 26;
+
+
+        document.getElementById(
+            "monthDays"
+        ).value =
+            settings.monthDays || 30;
+
+
+    } catch (error) {
+
+        console.log(
+            "خطا در بارگذاری تنظیمات:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================
    ذخیره تنظیمات
-===================================== */
+========================================= */
 
 function saveSettings() {
 
@@ -1347,46 +1510,46 @@ function saveSettings() {
     const settings = {
 
         baseSalary:
-            Number(
+            getNumericValue(
                 document.getElementById(
                     "baseSalary"
                 ).value
-            ) || 0,
+            ),
 
         housing:
-            Number(
+            getNumericValue(
                 document.getElementById(
                     "housing"
                 ).value
-            ) || 0,
+            ),
 
         food:
-            Number(
+            getNumericValue(
                 document.getElementById(
                     "food"
                 ).value
-            ) || 0,
+            ),
 
         marriage:
-            Number(
+            getNumericValue(
                 document.getElementById(
                     "marriage"
                 ).value
-            ) || 0,
+            ),
 
         child:
-            Number(
+            getNumericValue(
                 document.getElementById(
                     "child"
                 ).value
-            ) || 0,
+            ),
 
         otherBenefits:
-            Number(
+            getNumericValue(
                 document.getElementById(
                     "otherBenefits"
                 ).value
-            ) || 0,
+            ),
 
         monthlyHours:
             Number(
@@ -1455,16 +1618,14 @@ function saveSettings() {
             ) || 10,
 
         taxFreeLimit:
-            Number(
+            getNumericValue(
                 document.getElementById(
                     "taxFreeLimit"
                 ).value
-            ) || 0,
+            ),
 
         currency:
-            document.getElementById(
-                "currency"
-            ).value,
+            "ریال",
 
         workingDays:
             Number(
@@ -1485,9 +1646,61 @@ function saveSettings() {
 
     localStorage.setItem(
         SETTINGS_KEY,
-        JSON.stringify(
-            settings
-        )
+        JSON.stringify(settings)
+    );
+
+
+    /*
+       نمایش دوباره مبلغ‌ها
+       بعد از ذخیره
+    */
+
+    setMoneyField(
+        "baseSalary",
+        "baseSalaryWords",
+        settings.baseSalary
+    );
+
+
+    setMoneyField(
+        "housing",
+        "housingWords",
+        settings.housing
+    );
+
+
+    setMoneyField(
+        "food",
+        "foodWords",
+        settings.food
+    );
+
+
+    setMoneyField(
+        "marriage",
+        "marriageWords",
+        settings.marriage
+    );
+
+
+    setMoneyField(
+        "child",
+        "childWords",
+        settings.child
+    );
+
+
+    setMoneyField(
+        "otherBenefits",
+        "otherBenefitsWords",
+        settings.otherBenefits
+    );
+
+
+    setMoneyField(
+        "taxFreeLimit",
+        "taxFreeLimitWords",
+        settings.taxFreeLimit
     );
 
 
@@ -1501,32 +1714,33 @@ function saveSettings() {
         "block";
 
 
-    setTimeout(function() {
+    setTimeout(
+        function() {
 
-        success.style.display =
-            "none";
+            success.style.display =
+                "none";
 
-    }, 3000);
+        },
+        3000
+    );
 
 }
 
 
-
-/* =====================================
-   بازگردانی پیش‌فرض
-===================================== */
+/* =========================================
+   بازگردانی تنظیمات
+========================================= */
 
 function resetSettings() {
 
+    const answer =
+        confirm(
+            "آیا می‌خواهید تنظیمات به حالت پیش‌فرض برگردد؟"
+        );
 
-    if (
-        !confirm(
-            "آیا می‌خواهید همه تنظیمات به مقدار پیش‌فرض برگردد؟"
-        )
-    ) {
 
+    if (!answer) {
         return;
-
     }
 
 
@@ -1540,10 +1754,9 @@ function resetSettings() {
 }
 
 
-
-/* =====================================
-   صفحه اصلی
-===================================== */
+/* =========================================
+   بازگشت به صفحه اصلی
+========================================= */
 
 function goHome() {
 
@@ -1553,15 +1766,13 @@ function goHome() {
 }
 
 
-
-/* =====================================
-   شروع
-===================================== */
+/* =========================================
+   شروع سیستم
+========================================= */
 
 loadSettings();
 
 </script>
-
 
 </body>
 
