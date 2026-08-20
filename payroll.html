@@ -127,6 +127,10 @@ button {
     background: #475569;
 }
 
+.settings-btn {
+    background: #7c3aed;
+}
+
 .result {
     display: none;
 }
@@ -262,7 +266,7 @@ th {
 </h1>
 
 <p>
-محاسبه حقوق، مزایا، اضافه‌کاری، کسورات و اقساط
+محاسبه حقوق، مزایا، اضافه‌کاری، کسورات، بیمه، مالیات و اقساط
 </p>
 
 </header>
@@ -271,22 +275,15 @@ th {
 <div class="container">
 
 
-<!-- =====================================
-انتخاب اطلاعات
-===================================== -->
-
 <section class="box">
 
 <h2>
 🧮 اطلاعات محاسبه
 </h2>
 
-
 <div class="info">
 
-پرسنل و ماه را انتخاب کنید.
-سیستم اطلاعات کارکرد، حقوق و اقساط وام را
-به‌صورت خودکار دریافت می‌کند.
+تنظیمات بیمه، مالیات و ضرایب از بخش تنظیمات سیستم خوانده می‌شوند.
 
 </div>
 
@@ -371,6 +368,14 @@ onclick="calculateSalary()"
 
 
 <button
+class="settings-btn"
+onclick="goSettings()"
+>
+⚙️ تنظیمات
+</button>
+
+
+<button
 class="back-btn"
 onclick="goHome()"
 >
@@ -382,10 +387,6 @@ onclick="goHome()"
 </section>
 
 
-
-<!-- =====================================
-نتیجه
-===================================== -->
 
 <section
 class="box result"
@@ -598,10 +599,6 @@ id="netSalary"
 
 
 
-<!-- =====================================
-تاریخچه
-===================================== -->
-
 <section class="box">
 
 <h2>
@@ -617,57 +614,35 @@ id="netSalary"
 
 <tr>
 
-<th>
-پرسنل
-</th>
+<th>پرسنل</th>
 
-<th>
-ماه
-</th>
+<th>ماه</th>
 
-<th>
-حقوق پایه
-</th>
+<th>حقوق پایه</th>
 
-<th>
-مزایا
-</th>
+<th>مزایا</th>
 
-<th>
-اضافه‌کاری
-</th>
+<th>اضافه‌کاری</th>
 
-<th>
-شب‌کاری
-</th>
+<th>شب‌کاری</th>
 
-<th>
-تعطیل‌کاری
-</th>
+<th>تعطیل‌کاری</th>
 
-<th>
-غیبت
-</th>
+<th>غیبت</th>
 
-<th>
-قسط وام
-</th>
+<th>بیمه</th>
 
-<th>
-مساعده
-</th>
+<th>مالیات</th>
 
-<th>
-ناخالص
-</th>
+<th>قسط وام</th>
 
-<th>
-خالص
-</th>
+<th>مساعده</th>
 
-<th>
-عملیات
-</th>
+<th>ناخالص</th>
+
+<th>خالص</th>
+
+<th>عملیات</th>
 
 </tr>
 
@@ -693,7 +668,7 @@ id="netSalary"
 
 
 // =====================================
-// دریافت اطلاعات
+// اطلاعات
 // =====================================
 
 let employees =
@@ -721,16 +696,60 @@ localStorage.getItem("loans")
 
 
 // =====================================
-// بارگذاری پرسنل
+// تنظیمات پیش‌فرض
+// =====================================
+
+const defaultSettings = {
+
+overtimeRate: 1.4,
+
+nightRate: 0.35,
+
+holidayRate: 1.4,
+
+insuranceRate: 7,
+
+insuranceCeiling: 0,
+
+requiredHours: 176,
+
+taxRate: 0,
+
+taxExemption: 0
+
+};
+
+
+// =====================================
+// خواندن تنظیمات
+// =====================================
+
+function getSettings() {
+
+const saved =
+JSON.parse(
+localStorage.getItem(
+"salarySettings"
+)
+);
+
+return saved || defaultSettings;
+
+}
+
+
+// =====================================
+// پرسنل
 // =====================================
 
 function loadEmployees() {
 
 const select =
-document.getElementById("employee");
+document.getElementById(
+"employee"
+);
 
-select.innerHTML =
-`
+select.innerHTML = `
 <option value="">
 انتخاب پرسنل
 </option>
@@ -771,14 +790,13 @@ return Number(value || 0)
 
 
 // =====================================
-// پیدا کردن اقساط ماه
+// اقساط
 // =====================================
 
 function getMonthlyDeductions(
 personnelCode,
 month
 ) {
-
 
 let loanDeduction = 0;
 
@@ -792,9 +810,7 @@ if (
 loan.personnelCode !==
 personnelCode
 ) {
-
 return;
-
 }
 
 
@@ -802,30 +818,17 @@ if (
 Number(loan.remainingAmount || 0)
 <= 0
 ) {
-
 return;
-
 }
 
-
-/*
-اگر تاریخ شروع مشخص شده باشد،
-کسر از همان ماه به بعد انجام می‌شود.
-*/
 
 if (
 loan.startMonth &&
 month < loan.startMonth
 ) {
-
 return;
-
 }
 
-
-/*
-وام
-*/
 
 if (
 loan.type === "loan"
@@ -839,10 +842,6 @@ Number(loan.remainingAmount || 0)
 
 }
 
-
-/*
-مساعده
-*/
 
 if (
 loan.type === "advance"
@@ -873,7 +872,7 @@ advanceDeduction
 
 
 // =====================================
-// محاسبه حقوق
+// محاسبه
 // =====================================
 
 function calculateSalary() {
@@ -899,7 +898,7 @@ document.getElementById(
 );
 
 
-const requiredHours =
+const requiredHoursInput =
 Number(
 document.getElementById(
 "requiredHours"
@@ -941,17 +940,13 @@ personnelCode;
 if (!employee) {
 
 alert(
-"اطلاعات پرسنل پیدا نشد."
+"پرسنل پیدا نشد."
 );
 
 return;
 
 }
 
-
-// =====================================
-// کارکرد
-// =====================================
 
 const attendance =
 attendanceRecords.find(function(record) {
@@ -976,7 +971,49 @@ return;
 
 
 // =====================================
-// حقوق پایه و مزایا
+// تنظیمات
+// =====================================
+
+const settings =
+getSettings();
+
+
+const requiredHours =
+requiredHoursInput ||
+settings.requiredHours ||
+176;
+
+
+const overtimeRate =
+Number(settings.overtimeRate);
+
+
+const nightRate =
+Number(settings.nightRate);
+
+
+const holidayRate =
+Number(settings.holidayRate);
+
+
+const insuranceRate =
+Number(settings.insuranceRate);
+
+
+const insuranceCeiling =
+Number(settings.insuranceCeiling);
+
+
+const taxRate =
+Number(settings.taxRate);
+
+
+const taxExemption =
+Number(settings.taxExemption);
+
+
+// =====================================
+// حقوق پایه
 // =====================================
 
 const baseSalary =
@@ -1007,10 +1044,6 @@ baseSalary / requiredHours
 // اضافه کاری
 // =====================================
 
-const overtimeRate =
-1.4;
-
-
 const overtimePay =
 hourlyRate *
 Number(
@@ -1023,10 +1056,6 @@ overtimeRate;
 // شب کاری
 // =====================================
 
-const nightRate =
-0.35;
-
-
 const nightPay =
 hourlyRate *
 Number(
@@ -1038,10 +1067,6 @@ nightRate;
 // =====================================
 // تعطیل کاری
 // =====================================
-
-const holidayRate =
-1.4;
-
 
 const holidayPay =
 hourlyRate *
@@ -1071,29 +1096,64 @@ attendance.absenceDays || 0
 
 
 // =====================================
-// حقوق ناخالص
+// ناخالص
 // =====================================
 
 const grossSalary =
+Math.max(
+0,
 baseSalary +
 benefits +
 overtimePay +
 nightPay +
 holidayPay -
-absenceDeduction;
+absenceDeduction
+);
 
 
 // =====================================
-// بیمه و مالیات
-// فعلاً صفر
+// بیمه
 // =====================================
+
+let insuranceBase =
+grossSalary;
+
+
+if (
+insuranceCeiling > 0
+) {
+
+insuranceBase =
+Math.min(
+grossSalary,
+insuranceCeiling
+);
+
+}
+
 
 const insurance =
-0;
+insuranceBase *
+insuranceRate /
+100;
+
+
+// =====================================
+// مالیات
+// =====================================
+
+const taxableAmount =
+Math.max(
+0,
+grossSalary -
+taxExemption
+);
 
 
 const tax =
-0;
+taxableAmount *
+taxRate /
+100;
 
 
 // =====================================
@@ -1116,15 +1176,18 @@ deductions.advanceDeduction;
 
 
 // =====================================
-// حقوق خالص
+// خالص
 // =====================================
 
 const netSalary =
+Math.max(
+0,
 grossSalary -
 insurance -
 tax -
 loanDeduction -
-advanceDeduction;
+advanceDeduction
+);
 
 
 // =====================================
@@ -1210,7 +1273,7 @@ money(netSalary);
 
 
 // =====================================
-// ذخیره نتیجه
+// ذخیره
 // =====================================
 
 const payroll = {
@@ -1266,10 +1329,6 @@ new Date().toISOString()
 };
 
 
-// =====================================
-// اگر قبلاً وجود دارد، بروزرسانی شود
-// =====================================
-
 const existingIndex =
 payrollRecords.findIndex(
 function(record) {
@@ -1282,7 +1341,9 @@ month;
 });
 
 
-if (existingIndex >= 0) {
+if (
+existingIndex >= 0
+) {
 
 payrollRecords[
 existingIndex
@@ -1306,16 +1367,8 @@ payrollRecords
 );
 
 
-// =====================================
-// نمایش تاریخچه
-// =====================================
-
 displayPayrolls();
 
-
-// =====================================
-// پیام
-// =====================================
 
 alert(
 "حقوق با موفقیت محاسبه و ذخیره شد."
@@ -1325,7 +1378,7 @@ alert(
 
 
 // =====================================
-// نمایش تاریخچه
+// تاریخچه
 // =====================================
 
 function displayPayrolls() {
@@ -1349,7 +1402,7 @@ table.innerHTML = `
 <tr>
 
 <td
-colspan="13"
+colspan="15"
 class="empty"
 >
 
@@ -1376,53 +1429,33 @@ document.createElement("tr");
 
 row.innerHTML = `
 
-<td>
-${record.employeeName}
-</td>
+<td>${record.employeeName}</td>
 
-<td>
-${record.month}
-</td>
+<td>${record.month}</td>
 
-<td>
-${money(record.baseSalary)}
-</td>
+<td>${money(record.baseSalary)}</td>
 
-<td>
-${money(record.benefits)}
-</td>
+<td>${money(record.benefits)}</td>
 
-<td>
-${money(record.overtimePay)}
-</td>
+<td>${money(record.overtimePay)}</td>
 
-<td>
-${money(record.nightPay)}
-</td>
+<td>${money(record.nightPay)}</td>
 
-<td>
-${money(record.holidayPay)}
-</td>
+<td>${money(record.holidayPay)}</td>
 
-<td>
-${money(record.absenceDeduction)}
-</td>
+<td>${money(record.absenceDeduction)}</td>
 
-<td>
-${money(record.loan)}
-</td>
+<td>${money(record.insurance)}</td>
 
-<td>
-${money(record.advance)}
-</td>
+<td>${money(record.tax)}</td>
 
-<td>
-${money(record.grossSalary)}
-</td>
+<td>${money(record.loan)}</td>
 
-<td>
-${money(record.netSalary)}
-</td>
+<td>${money(record.advance)}</td>
+
+<td>${money(record.grossSalary)}</td>
+
+<td>${money(record.netSalary)}</td>
 
 <td>
 
@@ -1482,7 +1515,19 @@ displayPayrolls();
 
 
 // =====================================
-// صفحه اصلی
+// تنظیمات
+// =====================================
+
+function goSettings() {
+
+window.location.href =
+"settings.html";
+
+}
+
+
+// =====================================
+// خانه
 // =====================================
 
 function goHome() {
@@ -1494,13 +1539,12 @@ window.location.href =
 
 
 // =====================================
-// اجرای اولیه
+// شروع
 // =====================================
 
 loadEmployees();
 
 displayPayrolls();
-
 
 </script>
 
