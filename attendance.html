@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>حضور و غیاب</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+        }
+
+        .header {
+            background: #172033;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 2px solid #334155;
+        }
+
+        .header h1 {
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #94a3b8;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1300px;
+            margin: 30px auto;
+        }
+
+        .box {
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid #334155;
+            margin-bottom: 25px;
+        }
+
+        .box h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            color: #cbd5e1;
+        }
+
+        input,
+        select {
+            padding: 13px;
+            border-radius: 10px;
+            border: 1px solid #475569;
+            background: #0f172a;
+            color: white;
+            font-family: inherit;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #38bdf8;
+        }
+
+        .buttons {
+            margin-top: 22px;
+            display: flex;
+            gap: 12px;
+        }
+
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 13px 22px;
+            color: white;
+            font-family: inherit;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .save-btn {
+            background: #16a34a;
+        }
+
+        .save-btn:hover {
+            background: #15803d;
+        }
+
+        .back-btn {
+            background: #475569;
+        }
+
+        .delete-btn {
+            background: #dc2626;
+            padding: 8px 14px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            min-width: 1100px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #334155;
+            text-align: center;
+        }
+
+        th {
+            background: #172033;
+            color: #38bdf8;
+        }
+
+        .empty {
+            padding: 30px;
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        @media (max-width: 900px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <h1>🕐 حضور و غیاب و کارکرد</h1>
+
+    <p>
+        ثبت کارکرد ماهانه پرسنل
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- فرم ثبت کارکرد -->
+
+    <section class="box">
+
+        <h2>➕ ثبت کارکرد</h2>
+
+
+        <form id="attendanceForm">
+
+
+            <div class="form-grid">
+
+
+                <div class="input-group">
+
+                    <label>
+                        پرسنل *
+                    </label>
+
+                    <select
+                        id="employee"
+                        required
+                    >
+
+                        <option value="">
+                            انتخاب پرسنل
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        ماه *
+                    </label>
+
+                    <input
+                        type="month"
+                        id="month"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        روزهای کارکرد
+                    </label>
+
+                    <input
+                        type="number"
+                        id="workDays"
+                        min="0"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        ساعات کار عادی
+                    </label>
+
+                    <input
+                        type="number"
+                        id="normalHours"
+                        min="0"
+                        step="0.5"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        ساعات اضافه‌کاری
+                    </label>
+
+                    <input
+                        type="number"
+                        id="overtimeHours"
+                        min="0"
+                        step="0.5"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        ساعات شب‌کاری
+                    </label>
+
+                    <input
+                        type="number"
+                        id="nightHours"
+                        min="0"
+                        step="0.5"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        ساعات تعطیل‌کاری
+                    </label>
+
+                    <input
+                        type="number"
+                        id="holidayHours"
+                        min="0"
+                        step="0.5"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        روزهای مرخصی
+                    </label>
+
+                    <input
+                        type="number"
+                        id="leaveDays"
+                        min="0"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        روزهای غیبت
+                    </label>
+
+                    <input
+                        type="number"
+                        id="absenceDays"
+                        min="0"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        روزهای مأموریت
+                    </label>
+
+                    <input
+                        type="number"
+                        id="missionDays"
+                        min="0"
+                        value="0"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                >
+                    💾 ذخیره کارکرد
+                </button>
+
+
+                <button
+                    type="button"
+                    class="back-btn"
+                    onclick="goHome()"
+                >
+                    🏠 صفحه اصلی
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </section>
+
+
+    <!-- لیست کارکرد -->
+
+    <section class="box">
+
+        <h2>📋 کارکردهای ثبت‌شده</h2>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>پرسنل</th>
+
+                        <th>ماه</th>
+
+                        <th>روز کار</th>
+
+                        <th>ساعت عادی</th>
+
+                        <th>اضافه‌کاری</th>
+
+                        <th>شب‌کاری</th>
+
+                        <th>تعطیل‌کاری</th>
+
+                        <th>مرخصی</th>
+
+                        <th>غیبت</th>
+
+                        <th>مأموریت</th>
+
+                        <th>عملیات</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="attendanceTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+<script>
+
+
+    // دریافت پرسنل
+
+    let employees =
+        JSON.parse(
+            localStorage.getItem("employees")
+        ) || [];
+
+
+    // دریافت کارکردها
+
+    let attendanceRecords =
+        JSON.parse(
+            localStorage.getItem("attendanceRecords")
+        ) || [];
+
+
+    // پر کردن لیست پرسنل
+
+    function loadEmployees() {
+
+        const select =
+            document.getElementById("employee");
+
+
+        select.innerHTML =
+            `<option value="">
+                انتخاب پرسنل
+            </option>`;
+
+
+        employees.forEach(function(employee) {
+
+            const option =
+                document.createElement("option");
+
+
+            option.value =
+                employee.personnelCode;
+
+
+            option.textContent =
+                employee.personnelCode +
+                " - " +
+                employee.fullName;
+
+
+            select.appendChild(option);
+
+        });
+
+    }
+
+
+    // نمایش کارکردها
+
+    function displayAttendance() {
+
+        const table =
+            document.getElementById(
+                "attendanceTable"
+            );
+
+
+        table.innerHTML = "";
+
+
+        if (attendanceRecords.length === 0) {
+
+            table.innerHTML = `
+                <tr>
+                    <td colspan="11" class="empty">
+                        هنوز کارکردی ثبت نشده است.
+                    </td>
+                </tr>
+            `;
+
+            return;
+
+        }
+
+
+        attendanceRecords.forEach(
+            function(record, index) {
+
+
+                const row =
+                    document.createElement("tr");
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${record.employeeName}
+                    </td>
+
+                    <td>
+                        ${record.month}
+                    </td>
+
+                    <td>
+                        ${record.workDays}
+                    </td>
+
+                    <td>
+                        ${record.normalHours}
+                    </td>
+
+                    <td>
+                        ${record.overtimeHours}
+                    </td>
+
+                    <td>
+                        ${record.nightHours}
+                    </td>
+
+                    <td>
+                        ${record.holidayHours}
+                    </td>
+
+                    <td>
+                        ${record.leaveDays}
+                    </td>
+
+                    <td>
+                        ${record.absenceDays}
+                    </td>
+
+                    <td>
+                        ${record.missionDays}
+                    </td>
+
+                    <td>
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteAttendance(${index})"
+                        >
+                            حذف
+                        </button>
+
+                    </td>
+
+                `;
+
+
+                table.appendChild(row);
+
+            }
+        );
+
+    }
+
+
+    // ذخیره کارکرد
+
+    document
+        .getElementById("attendanceForm")
+        .addEventListener(
+            "submit",
+            function(event) {
+
+
+                event.preventDefault();
+
+
+                const personnelCode =
+                    document.getElementById(
+                        "employee"
+                    ).value;
+
+
+                if (!personnelCode) {
+
+                    alert(
+                        "لطفاً پرسنل را انتخاب کنید."
+                    );
+
+                    return;
+
+                }
+
+
+                const employee =
+                    employees.find(
+                        function(item) {
+
+                            return item.personnelCode ===
+                                personnelCode;
+
+                        }
+                    );
+
+
+                if (!employee) {
+
+                    alert(
+                        "پرسنل پیدا نشد."
+                    );
+
+                    return;
+
+                }
+
+
+                const record = {
+
+                    personnelCode:
+                        personnelCode,
+
+                    employeeName:
+                        employee.fullName,
+
+                    month:
+                        document.getElementById(
+                            "month"
+                        ).value,
+
+                    workDays:
+                        Number(
+                            document.getElementById(
+                                "workDays"
+                            ).value
+                        ),
+
+                    normalHours:
+                        Number(
+                            document.getElementById(
+                                "normalHours"
+                            ).value
+                        ),
+
+                    overtimeHours:
+                        Number(
+                            document.getElementById(
+                                "overtimeHours"
+                            ).value
+                        ),
+
+                    nightHours:
+                        Number(
+                            document.getElementById(
+                                "nightHours"
+                            ).value
+                        ),
+
+                    holidayHours:
+                        Number(
+                            document.getElementById(
+                                "holidayHours"
+                            ).value
+                        ),
+
+                    leaveDays:
+                        Number(
+                            document.getElementById(
+                                "leaveDays"
+                            ).value
+                        ),
+
+                    absenceDays:
+                        Number(
+                            document.getElementById(
+                                "absenceDays"
+                            ).value
+                        ),
+
+                    missionDays:
+                        Number(
+                            document.getElementById(
+                                "missionDays"
+                            ).value
+                        )
+
+                };
+
+
+                attendanceRecords.push(record);
+
+
+                localStorage.setItem(
+                    "attendanceRecords",
+                    JSON.stringify(
+                        attendanceRecords
+                    )
+                );
+
+
+                alert(
+                    "کارکرد با موفقیت ثبت شد."
+                );
+
+
+                document
+                    .getElementById(
+                        "attendanceForm"
+                    )
+                    .reset();
+
+
+                displayAttendance();
+
+            }
+        );
+
+
+    // حذف کارکرد
+
+    function deleteAttendance(index) {
+
+        if (
+            !confirm(
+                "آیا از حذف این کارکرد مطمئن هستید؟"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        attendanceRecords.splice(
+            index,
+            1
+        );
+
+
+        localStorage.setItem(
+            "attendanceRecords",
+            JSON.stringify(
+                attendanceRecords
+            )
+        );
+
+
+        displayAttendance();
+
+    }
+
+
+    // صفحه اصلی
+
+    function goHome() {
+
+        window.location.href =
+            "index.html";
+
+    }
+
+
+    // اجرای اولیه
+
+    loadEmployees();
+
+    displayAttendance();
+
+
+</script>
+
+
+</body>
+
+</html>
