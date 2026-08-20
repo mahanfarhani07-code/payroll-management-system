@@ -2,11 +2,8 @@
 <html lang="fa" dir="rtl">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>تنظیمات حقوق و دستمزد</title>
 
@@ -22,11 +19,12 @@ body {
     font-family: Tahoma, Arial, sans-serif;
     background: #0f172a;
     color: white;
+    min-height: 100vh;
 }
 
 .header {
     background: #172033;
-    padding: 28px;
+    padding: 30px 20px;
     text-align: center;
     border-bottom: 2px solid #334155;
 }
@@ -41,15 +39,15 @@ body {
 
 .container {
     width: 94%;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 30px auto;
 }
 
 .box {
     background: #1e293b;
-    padding: 28px;
-    border-radius: 20px;
     border: 1px solid #334155;
+    border-radius: 20px;
+    padding: 28px;
     margin-bottom: 25px;
 }
 
@@ -61,15 +59,16 @@ body {
     background: #172033;
     border-right: 4px solid #38bdf8;
     padding: 15px;
-    margin-bottom: 22px;
     color: #cbd5e1;
     line-height: 2;
+    margin-bottom: 25px;
+    border-radius: 8px;
 }
 
 .form-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
 .input-group {
@@ -82,7 +81,8 @@ label {
     margin-bottom: 8px;
 }
 
-input {
+input,
+select {
     padding: 13px;
     border-radius: 10px;
     border: 1px solid #475569;
@@ -91,7 +91,8 @@ input {
     font-family: inherit;
 }
 
-input:focus {
+input:focus,
+select:focus {
     outline: none;
     border-color: #38bdf8;
 }
@@ -103,9 +104,9 @@ input:focus {
 }
 
 .buttons {
-    margin-top: 25px;
     display: flex;
     gap: 12px;
+    margin-top: 25px;
 }
 
 button {
@@ -126,29 +127,13 @@ button {
     background: #dc2626;
 }
 
-.back-btn {
+.home-btn {
     background: #475569;
 }
 
-.save-btn:hover {
-    background: #15803d;
-}
-
-.reset-btn:hover {
-    background: #b91c1c;
-}
-
-.back-btn:hover {
-    background: #334155;
-}
-
-.warning {
-    background: #451a03;
-    border-right: 4px solid #f59e0b;
-    color: #fde68a;
-    padding: 15px;
-    margin-top: 20px;
-    line-height: 2;
+button:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
 }
 
 .success {
@@ -158,9 +143,32 @@ button {
     color: #bbf7d0;
     padding: 15px;
     margin-top: 20px;
+    border-radius: 8px;
 }
 
-@media (max-width: 700px) {
+.section-title {
+    color: #38bdf8;
+    margin-bottom: 18px;
+    font-size: 18px;
+}
+
+.card {
+    background: #172033;
+    border: 1px solid #334155;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+@media (max-width: 900px) {
+
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
 
     .form-grid {
         grid-template-columns: 1fr;
@@ -187,7 +195,7 @@ button {
 </h1>
 
 <p>
-مدیریت ضرایب و کسورات سیستم
+تنظیم قوانین و مقادیر مورد استفاده در محاسبه حقوق
 </p>
 
 </header>
@@ -196,21 +204,190 @@ button {
 <div class="container">
 
 
-<section class="box">
+<!-- =================================
+     توضیحات
+================================= -->
 
-<h2>
-🧮 ضرایب محاسبه
-</h2>
+<section class="box">
 
 <div class="info">
 
-مقادیر زیر برای محاسبات سیستم استفاده می‌شوند.
-مقادیر را مطابق قوانین و مقررات موردنظر سازمان تنظیم کنید.
+از این قسمت می‌توانید مقادیر پیش‌فرض سیستم را تنظیم کنید.
+این اطلاعات در مراحل بعدی برای محاسبه حقوق، مزایا و کسورات استفاده خواهند شد.
 
 </div>
 
 
+<!-- =================================
+     حقوق و مزایا
+================================= -->
+
+<div class="card">
+
+<h2 class="section-title">
+💰 حقوق و مزایا
+</h2>
+
+
 <div class="form-grid">
+
+
+<div class="input-group">
+
+<label>
+حقوق پایه پیش‌فرض
+</label>
+
+<input
+type="number"
+id="baseSalary"
+min="0"
+placeholder="مثلاً 100000000"
+>
+
+<span class="unit">
+ریال
+</span>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+حق مسکن
+</label>
+
+<input
+type="number"
+id="housing"
+min="0"
+placeholder="مبلغ حق مسکن"
+>
+
+<span class="unit">
+ریال
+</span>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+بن کارگری
+</label>
+
+<input
+type="number"
+id="food"
+min="0"
+placeholder="مبلغ بن"
+>
+
+<span class="unit">
+ریال
+</span>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+حق تأهل
+</label>
+
+<input
+type="number"
+id="marriage"
+min="0"
+placeholder="مبلغ حق تأهل"
+>
+
+<span class="unit">
+ریال
+</span>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+حق اولاد
+</label>
+
+<input
+type="number"
+id="child"
+min="0"
+placeholder="مبلغ برای هر فرزند"
+>
+
+<span class="unit">
+ریال
+</span>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+سایر مزایا
+</label>
+
+<input
+type="number"
+id="otherBenefits"
+min="0"
+placeholder="سایر مزایا"
+>
+
+<span class="unit">
+ریال
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =================================
+     اضافه کاری
+================================= -->
+
+<div class="card">
+
+<h2 class="section-title">
+⏰ تنظیمات کارکرد
+</h2>
+
+
+<div class="form-grid">
+
+
+<div class="input-group">
+
+<label>
+ساعات کار موظفی ماهانه
+</label>
+
+<input
+type="number"
+id="monthlyHours"
+min="1"
+value="176"
+>
+
+<span class="unit">
+ساعت
+</span>
+
+</div>
 
 
 <div class="input-group">
@@ -222,13 +399,14 @@ button {
 <input
 type="number"
 id="overtimeRate"
-step="0.01"
 min="0"
+step="0.01"
+value="1.4"
 >
 
-<div class="unit">
-مثلاً 1.4
-</div>
+<span class="unit">
+ضریب
+</span>
 
 </div>
 
@@ -242,13 +420,14 @@ min="0"
 <input
 type="number"
 id="nightRate"
-step="0.01"
 min="0"
+step="0.01"
+value="1.35"
 >
 
-<div class="unit">
-مثلاً 0.35
-</div>
+<span class="unit">
+ضریب
+</span>
 
 </div>
 
@@ -262,13 +441,14 @@ min="0"
 <input
 type="number"
 id="holidayRate"
+min="0"
 step="0.01"
-min="0"
+value="1.4"
 >
 
-<div class="unit">
-مثلاً 1.4
-</div>
+<span class="unit">
+ضریب
+</span>
 
 </div>
 
@@ -276,19 +456,20 @@ min="0"
 <div class="input-group">
 
 <label>
-درصد بیمه سهم پرسنل
+ضریب مأموریت
 </label>
 
 <input
 type="number"
-id="insuranceRate"
+id="missionRate"
+min="0"
 step="0.01"
-min="0"
+value="1"
 >
 
-<div class="unit">
-درصد
-</div>
+<span class="unit">
+ضریب
+</span>
 
 </div>
 
@@ -296,18 +477,14 @@ min="0"
 <div class="input-group">
 
 <label>
-حداکثر بیمه
+ساعت شروع کار
 </label>
 
 <input
-type="number"
-id="insuranceCeiling"
-min="0"
+type="time"
+id="workStart"
+value="08:00"
 >
-
-<div class="unit">
-ریال
-</div>
 
 </div>
 
@@ -315,41 +492,32 @@ min="0"
 <div class="input-group">
 
 <label>
-حداقل ساعات موظفی
+ساعت پایان کار
 </label>
 
 <input
-type="number"
-id="requiredHours"
-min="1"
+type="time"
+id="workEnd"
+value="16:00"
 >
 
-<div class="unit">
-ساعت در ماه
-</div>
-
 </div>
 
 
 </div>
 
-</section>
+</div>
 
 
+<!-- =================================
+     بیمه و مالیات
+================================= -->
 
-<section class="box">
+<div class="card">
 
-<h2>
-💰 تنظیمات مالیات
+<h2 class="section-title">
+🧾 بیمه و مالیات
 </h2>
-
-
-<div class="info">
-
-فعلاً مالیات را به صورت درصدی تنظیم می‌کنیم.
-در مرحله بعد می‌توانیم جدول پلکانی مالیات را اضافه کنیم.
-
-</div>
 
 
 <div class="form-grid">
@@ -358,19 +526,21 @@ min="1"
 <div class="input-group">
 
 <label>
-درصد مالیات
+درصد بیمه سهم کارمند
 </label>
 
 <input
 type="number"
-id="taxRate"
-step="0.01"
+id="insuranceRate"
 min="0"
+max="100"
+step="0.01"
+value="7"
 >
 
-<div class="unit">
+<span class="unit">
 درصد
-</div>
+</span>
 
 </div>
 
@@ -378,45 +548,157 @@ min="0"
 <div class="input-group">
 
 <label>
-معافیت مالیاتی ماهانه
+درصد بیمه سهم کارفرما
 </label>
 
 <input
 type="number"
-id="taxExemption"
+id="employerInsuranceRate"
 min="0"
+max="100"
+step="0.01"
+value="23"
 >
 
-<div class="unit">
+<span class="unit">
+درصد
+</span>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+درصد مالیات پیش‌فرض
+</label>
+
+<input
+type="number"
+id="taxRate"
+min="0"
+max="100"
+step="0.01"
+value="10"
+>
+
+<span class="unit">
+درصد
+</span>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+سقف معافیت مالیاتی ماهانه
+</label>
+
+<input
+type="number"
+id="taxFreeLimit"
+min="0"
+placeholder="مبلغ معافیت"
+>
+
+<span class="unit">
 ریال
+</span>
+
+</div>
+
 </div>
 
 </div>
 
 
-</div>
+<!-- =================================
+     سایر تنظیمات
+================================= -->
 
+<div class="card">
 
-<div class="warning">
-
-⚠️ نرخ‌های بیمه و مالیات را قبل از استفاده عملی،
-بر اساس مقررات قانونی و سال مالی مربوطه تنظیم کنید.
-
-</div>
-
-</section>
-
-
-
-<section class="box">
-
-<h2>
-💾 ذخیره تنظیمات
+<h2 class="section-title">
+🔧 سایر تنظیمات
 </h2>
 
 
-<div class="buttons">
+<div class="form-grid">
 
+
+<div class="input-group">
+
+<label>
+واحد پول
+</label>
+
+<select id="currency">
+
+<option value="ریال">
+ریال
+</option>
+
+<option value="تومان">
+تومان
+</option>
+
+</select>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+روزهای کاری ماه
+</label>
+
+<input
+type="number"
+id="workingDays"
+min="1"
+max="31"
+value="26"
+>
+
+<span class="unit">
+روز
+</span>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+تعداد روزهای ماه
+</label>
+
+<input
+type="number"
+id="monthDays"
+min="1"
+max="31"
+value="30"
+>
+
+<span class="unit">
+روز
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =================================
+     دکمه ها
+================================= -->
+
+<div class="buttons">
 
 <button
 class="save-btn"
@@ -430,17 +712,16 @@ onclick="saveSettings()"
 class="reset-btn"
 onclick="resetSettings()"
 >
-♻️ بازگردانی پیش‌فرض
+🔄 بازگردانی پیش‌فرض
 </button>
 
 
 <button
-class="back-btn"
+class="home-btn"
 onclick="goHome()"
 >
 🏠 صفحه اصلی
 </button>
-
 
 </div>
 
@@ -464,97 +745,153 @@ id="success"
 
 
 // =====================================
-// تنظیمات پیش‌فرض
+// کلید ذخیره تنظیمات
 // =====================================
 
-const defaultSettings = {
-
-overtimeRate: 1.4,
-
-nightRate: 0.35,
-
-holidayRate: 1.4,
-
-insuranceRate: 7,
-
-insuranceCeiling: 0,
-
-requiredHours: 176,
-
-taxRate: 0,
-
-taxExemption: 0
-
-};
+const SETTINGS_KEY =
+"payrollSettings";
 
 
 // =====================================
-// بارگذاری تنظیمات
+// دریافت تنظیمات
 // =====================================
 
 function loadSettings() {
 
 
-let settings =
+const settings =
 JSON.parse(
-localStorage.getItem("salarySettings")
+localStorage.getItem(
+SETTINGS_KEY
+)
 );
 
 
 if (!settings) {
 
-settings =
-defaultSettings;
+return;
 
 }
 
 
 document.getElementById(
+"baseSalary"
+).value =
+settings.baseSalary || "";
+
+
+document.getElementById(
+"housing"
+).value =
+settings.housing || "";
+
+
+document.getElementById(
+"food"
+).value =
+settings.food || "";
+
+
+document.getElementById(
+"marriage"
+).value =
+settings.marriage || "";
+
+
+document.getElementById(
+"child"
+).value =
+settings.child || "";
+
+
+document.getElementById(
+"otherBenefits"
+).value =
+settings.otherBenefits || "";
+
+
+document.getElementById(
+"monthlyHours"
+).value =
+settings.monthlyHours || 176;
+
+
+document.getElementById(
 "overtimeRate"
 ).value =
-settings.overtimeRate;
+settings.overtimeRate || 1.4;
 
 
 document.getElementById(
 "nightRate"
 ).value =
-settings.nightRate;
+settings.nightRate || 1.35;
 
 
 document.getElementById(
 "holidayRate"
 ).value =
-settings.holidayRate;
+settings.holidayRate || 1.4;
+
+
+document.getElementById(
+"missionRate"
+).value =
+settings.missionRate || 1;
+
+
+document.getElementById(
+"workStart"
+).value =
+settings.workStart || "08:00";
+
+
+document.getElementById(
+"workEnd"
+).value =
+settings.workEnd || "16:00";
 
 
 document.getElementById(
 "insuranceRate"
 ).value =
-settings.insuranceRate;
+settings.insuranceRate || 7;
 
 
 document.getElementById(
-"insuranceCeiling"
+"employerInsuranceRate"
 ).value =
-settings.insuranceCeiling;
-
-
-document.getElementById(
-"requiredHours"
-).value =
-settings.requiredHours;
+settings.employerInsuranceRate || 23;
 
 
 document.getElementById(
 "taxRate"
 ).value =
-settings.taxRate;
+settings.taxRate || 10;
 
 
 document.getElementById(
-"taxExemption"
+"taxFreeLimit"
 ).value =
-settings.taxExemption;
+settings.taxFreeLimit || "";
+
+
+document.getElementById(
+"currency"
+).value =
+settings.currency || "ریال";
+
+
+document.getElementById(
+"workingDays"
+).value =
+settings.workingDays || 26;
+
+
+document.getElementById(
+"monthDays"
+).value =
+settings.monthDays || 30;
 
 }
 
@@ -568,84 +905,167 @@ function saveSettings() {
 
 const settings = {
 
+baseSalary:
+Number(
+document.getElementById(
+"baseSalary"
+).value
+) || 0,
+
+housing:
+Number(
+document.getElementById(
+"housing"
+).value
+) || 0,
+
+food:
+Number(
+document.getElementById(
+"food"
+).value
+) || 0,
+
+marriage:
+Number(
+document.getElementById(
+"marriage"
+).value
+) || 0,
+
+child:
+Number(
+document.getElementById(
+"child"
+).value
+) || 0,
+
+otherBenefits:
+Number(
+document.getElementById(
+"otherBenefits"
+).value
+) || 0,
+
+monthlyHours:
+Number(
+document.getElementById(
+"monthlyHours"
+).value
+) || 176,
+
 overtimeRate:
 Number(
 document.getElementById(
 "overtimeRate"
 ).value
-),
+) || 1.4,
 
 nightRate:
 Number(
 document.getElementById(
 "nightRate"
 ).value
-),
+) || 1.35,
 
 holidayRate:
 Number(
 document.getElementById(
 "holidayRate"
 ).value
-),
+) || 1.4,
+
+missionRate:
+Number(
+document.getElementById(
+"missionRate"
+).value
+) || 1,
+
+workStart:
+document.getElementById(
+"workStart"
+).value,
+
+workEnd:
+document.getElementById(
+"workEnd"
+).value,
 
 insuranceRate:
 Number(
 document.getElementById(
 "insuranceRate"
 ).value
-),
+) || 7,
 
-insuranceCeiling:
+employerInsuranceRate:
 Number(
 document.getElementById(
-"insuranceCeiling"
+"employerInsuranceRate"
 ).value
-),
-
-requiredHours:
-Number(
-document.getElementById(
-"requiredHours"
-).value
-),
+) || 23,
 
 taxRate:
 Number(
 document.getElementById(
 "taxRate"
 ).value
-),
+) || 10,
 
-taxExemption:
+taxFreeLimit:
 Number(
 document.getElementById(
-"taxExemption"
+"taxFreeLimit"
 ).value
-)
+) || 0,
+
+currency:
+document.getElementById(
+"currency"
+).value,
+
+workingDays:
+Number(
+document.getElementById(
+"workingDays"
+).value
+) || 26,
+
+monthDays:
+Number(
+document.getElementById(
+"monthDays"
+).value
+) || 30
 
 };
 
 
+// ذخیره در مرورگر
+
 localStorage.setItem(
-"salarySettings",
+SETTINGS_KEY,
 JSON.stringify(
 settings
 )
 );
 
 
+// پیام موفقیت
+
+const success =
 document.getElementById(
 "success"
-).style.display =
+);
+
+success.style.display =
 "block";
 
 
 setTimeout(function() {
 
-document.getElementById(
-"success"
-).style.display =
+success.style.display =
 "none";
 
 }, 3000);
@@ -662,7 +1082,7 @@ function resetSettings() {
 
 if (
 !confirm(
-"آیا می‌خواهید تنظیمات به حالت پیش‌فرض برگردد؟"
+"آیا می‌خواهید همه تنظیمات به مقدار پیش‌فرض برگردد؟"
 )
 ) {
 
@@ -671,16 +1091,12 @@ return;
 }
 
 
-localStorage.setItem(
-"salarySettings",
-JSON.stringify(
-defaultSettings
-)
+localStorage.removeItem(
+SETTINGS_KEY
 );
 
 
-loadSettings();
-
+location.reload();
 
 }
 
@@ -702,7 +1118,6 @@ window.location.href =
 // =====================================
 
 loadSettings();
-
 
 </script>
 
