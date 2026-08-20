@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>مدیریت پرسنل</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+        }
+
+        .header {
+            background: #172033;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 2px solid #334155;
+        }
+
+        .header h1 {
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #94a3b8;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .form-box {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #334155;
+        }
+
+        .form-box h2 {
+            margin-bottom: 25px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            margin-bottom: 8px;
+            color: #cbd5e1;
+        }
+
+        .input-group input,
+        .input-group select {
+            padding: 13px;
+            border-radius: 10px;
+            border: 1px solid #475569;
+            background: #0f172a;
+            color: white;
+            font-family: inherit;
+            font-size: 15px;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #38bdf8;
+        }
+
+        .buttons {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+        }
+
+        button {
+            padding: 14px 25px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-family: inherit;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .save-btn {
+            background: #16a34a;
+        }
+
+        .save-btn:hover {
+            background: #15803d;
+        }
+
+        .back-btn {
+            background: #475569;
+        }
+
+        .employees-box {
+            margin-top: 30px;
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #334155;
+        }
+
+        .employees-box h2 {
+            margin-bottom: 20px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        th,
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #334155;
+            text-align: center;
+        }
+
+        th {
+            background: #172033;
+            color: #38bdf8;
+        }
+
+        td {
+            color: #e2e8f0;
+        }
+
+        .delete-btn {
+            background: #dc2626;
+            padding: 8px 14px;
+        }
+
+        .delete-btn:hover {
+            background: #b91c1c;
+        }
+
+        .empty {
+            text-align: center;
+            color: #94a3b8;
+            padding: 25px;
+        }
+
+        @media (max-width: 800px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <h1>👤 مدیریت پرسنل</h1>
+
+    <p>
+        ثبت و مدیریت اطلاعات کارکنان
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- فرم ثبت پرسنل -->
+
+    <section class="form-box">
+
+        <h2>
+            ➕ ثبت پرسنل جدید
+        </h2>
+
+
+        <form id="employeeForm">
+
+
+            <div class="form-grid">
+
+
+                <div class="input-group">
+
+                    <label>
+                        کد پرسنلی *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="personnelCode"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        نام و نام خانوادگی *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        کد ملی *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nationalCode"
+                        maxlength="10"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        شماره موبایل
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        سمت
+                    </label>
+
+                    <input
+                        type="text"
+                        id="position"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        واحد سازمانی
+                    </label>
+
+                    <input
+                        type="text"
+                        id="department"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        تاریخ استخدام
+                    </label>
+
+                    <input
+                        type="date"
+                        id="hireDate"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        نوع قرارداد
+                    </label>
+
+                    <select id="contractType">
+
+                        <option value="دائم">
+                            دائم
+                        </option>
+
+                        <option value="موقت">
+                            موقت
+                        </option>
+
+                        <option value="پروژه‌ای">
+                            پروژه‌ای
+                        </option>
+
+                        <option value="ساعتی">
+                            ساعتی
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        حقوق پایه ماهانه (ریال) *
+                    </label>
+
+                    <input
+                        type="number"
+                        id="baseSalary"
+                        min="0"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        مزایای ثابت ماهانه (ریال)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="benefits"
+                        min="0"
+                        value="0"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        شماره حساب
+                    </label>
+
+                    <input
+                        type="text"
+                        id="accountNumber"
+                    >
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label>
+                        شماره شبا
+                    </label>
+
+                    <input
+                        type="text"
+                        id="iban"
+                        placeholder="IR..."
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                >
+                    💾 ذخیره پرسنل
+                </button>
+
+
+                <button
+                    type="button"
+                    class="back-btn"
+                    onclick="goHome()"
+                >
+                    🏠 بازگشت
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </section>
+
+
+    <!-- جدول پرسنل -->
+
+    <section class="employees-box">
+
+        <h2>
+            📋 لیست پرسنل
+        </h2>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            کد
+                        </th>
+
+                        <th>
+                            نام
+                        </th>
+
+                        <th>
+                            کد ملی
+                        </th>
+
+                        <th>
+                            سمت
+                        </th>
+
+                        <th>
+                            واحد
+                        </th>
+
+                        <th>
+                            قرارداد
+                        </th>
+
+                        <th>
+                            حقوق پایه
+                        </th>
+
+                        <th>
+                            عملیات
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="employeeTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+<script>
+
+
+    // دریافت اطلاعات ذخیره شده
+
+    let employees =
+        JSON.parse(
+            localStorage.getItem("employees")
+        ) || [];
+
+
+    // نمایش پرسنل
+
+    function displayEmployees() {
+
+        const table =
+            document.getElementById("employeeTable");
+
+
+        table.innerHTML = "";
+
+
+        if (employees.length === 0) {
+
+            table.innerHTML = `
+                <tr>
+                    <td colspan="8" class="empty">
+                        هنوز هیچ پرسنلی ثبت نشده است.
+                    </td>
+                </tr>
+            `;
+
+            return;
+        }
+
+
+        employees.forEach(function(employee, index) {
+
+            const row = document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${employee.personnelCode}
+                </td>
+
+                <td>
+                    ${employee.fullName}
+                </td>
+
+                <td>
+                    ${employee.nationalCode}
+                </td>
+
+                <td>
+                    ${employee.position}
+                </td>
+
+                <td>
+                    ${employee.department}
+                </td>
+
+                <td>
+                    ${employee.contractType}
+                </td>
+
+                <td>
+                    ${Number(employee.baseSalary)
+                        .toLocaleString("fa-IR")}
+                </td>
+
+                <td>
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteEmployee(${index})"
+                    >
+                        حذف
+                    </button>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        });
+
+    }
+
+
+    // ذخیره پرسنل
+
+    document
+        .getElementById("employeeForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+
+            const employee = {
+
+                personnelCode:
+                    document.getElementById(
+                        "personnelCode"
+                    ).value.trim(),
+
+                fullName:
+                    document.getElementById(
+                        "fullName"
+                    ).value.trim(),
+
+                nationalCode:
+                    document.getElementById(
+                        "nationalCode"
+                    ).value.trim(),
+
+                phone:
+                    document.getElementById(
+                        "phone"
+                    ).value.trim(),
+
+                position:
+                    document.getElementById(
+                        "position"
+                    ).value.trim(),
+
+                department:
+                    document.getElementById(
+                        "department"
+                    ).value.trim(),
+
+                hireDate:
+                    document.getElementById(
+                        "hireDate"
+                    ).value,
+
+                contractType:
+                    document.getElementById(
+                        "contractType"
+                    ).value,
+
+                baseSalary:
+                    document.getElementById(
+                        "baseSalary"
+                    ).value,
+
+                benefits:
+                    document.getElementById(
+                        "benefits"
+                    ).value,
+
+                accountNumber:
+                    document.getElementById(
+                        "accountNumber"
+                    ).value.trim(),
+
+                iban:
+                    document.getElementById(
+                        "iban"
+                    ).value.trim()
+
+            };
+
+
+            // بررسی کد پرسنلی تکراری
+
+            const duplicate =
+                employees.some(function(item) {
+
+                    return item.personnelCode ===
+                        employee.personnelCode;
+
+                });
+
+
+            if (duplicate) {
+
+                alert(
+                    "این کد پرسنلی قبلاً ثبت شده است."
+                );
+
+                return;
+
+            }
+
+
+            employees.push(employee);
+
+
+            localStorage.setItem(
+                "employees",
+                JSON.stringify(employees)
+            );
+
+
+            alert(
+                "پرسنل با موفقیت ثبت شد."
+            );
+
+
+            document
+                .getElementById("employeeForm")
+                .reset();
+
+
+            displayEmployees();
+
+        });
+
+
+    // حذف پرسنل
+
+    function deleteEmployee(index) {
+
+        const answer =
+            confirm(
+                "آیا از حذف این پرسنل مطمئن هستید؟"
+            );
+
+
+        if (!answer) {
+            return;
+        }
+
+
+        employees.splice(index, 1);
+
+
+        localStorage.setItem(
+            "employees",
+            JSON.stringify(employees)
+        );
+
+
+        displayEmployees();
+
+    }
+
+
+    // بازگشت به صفحه اصلی
+
+    function goHome() {
+
+        window.location.href =
+            "index.html";
+
+    }
+
+
+    // اجرای اولیه
+
+    displayEmployees();
+
+
+</script>
+
+
+</body>
+
+</html>
