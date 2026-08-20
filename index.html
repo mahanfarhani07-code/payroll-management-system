@@ -1,202 +1,220 @@
-```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-    <title>سیستم مدیریت حقوق و دستمزد</title>
+<title>سیستم مدیریت حقوق و دستمزد</title>
 
-    <style>
+<style>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        body {
-            font-family: Tahoma, Arial, sans-serif;
-            background: #0f172a;
-            color: white;
-            min-height: 100vh;
-        }
+body {
+    font-family: Tahoma, Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+    min-height: 100vh;
+}
 
-        .header {
-            background: #172033;
-            padding: 30px;
-            text-align: center;
-            border-bottom: 2px solid #334155;
-        }
+.header {
+    background: #172033;
+    padding: 35px 20px;
+    text-align: center;
+    border-bottom: 2px solid #334155;
+}
 
-        .header h1 {
-            font-size: 30px;
-            margin-bottom: 12px;
-        }
+.header h1 {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
 
-        .header p {
-            color: #94a3b8;
-            font-size: 15px;
-        }
+.header p {
+    color: #94a3b8;
+    font-size: 16px;
+}
 
-        .container {
-            width: 92%;
-            max-width: 1250px;
-            margin: 30px auto;
-        }
+.container {
+    width: 94%;
+    max-width: 1400px;
+    margin: 35px auto;
+}
 
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
-        }
 
-        .card {
-            background: #1e293b;
-            border-radius: 18px;
-            padding: 28px;
-            text-align: center;
-            border: 1px solid #334155;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
+/* =========================
+   کارت های آماری
+========================= */
 
-        .card h2 {
-            font-size: 18px;
-            color: #cbd5e1;
-            margin-bottom: 15px;
-        }
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
 
-        .number {
-            font-size: 32px;
-            font-weight: bold;
-            color: #38bdf8;
-        }
+.stat-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+}
 
-        .menu {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
-        }
+.stat-card h3 {
+    color: #cbd5e1;
+    margin-bottom: 15px;
+}
 
-        .menu button {
-            padding: 24px 15px;
-            border: none;
-            border-radius: 16px;
-            background: #2563eb;
-            color: white;
-            font-size: 16px;
-            font-family: inherit;
-            cursor: pointer;
-            transition: 0.25s;
-        }
+.stat-card .number {
+    font-size: 32px;
+    font-weight: bold;
+    color: #38bdf8;
+}
 
-        .menu button:hover {
-            background: #1d4ed8;
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(37,99,235,0.25);
-        }
 
-        .menu .employee {
-            background: #0891b2;
-        }
+/* =========================
+   منوی اصلی
+========================= */
 
-        .menu .employee:hover {
-            background: #0e7490;
-        }
+.menu {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
 
-        .menu .attendance {
-            background: #7c3aed;
-        }
+.menu-button {
+    border: none;
+    min-height: 130px;
+    border-radius: 18px;
+    color: white;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    padding: 20px;
+}
 
-        .menu .attendance:hover {
-            background: #6d28d9;
-        }
+.menu-button:hover {
+    transform: translateY(-4px);
+    filter: brightness(1.08);
+}
 
-        .menu .payroll {
-            background: #16a34a;
-        }
+.icon {
+    display: block;
+    font-size: 35px;
+    margin-bottom: 15px;
+}
 
-        .menu .payroll:hover {
-            background: #15803d;
-        }
 
-        .menu .payslip {
-            background: #ea580c;
-        }
+/* رنگ دکمه ها */
 
-        .menu .payslip:hover {
-            background: #c2410c;
-        }
+.personnel {
+    background: #0891b2;
+}
 
-        .welcome {
-            background: #172033;
-            border-radius: 18px;
-            padding: 35px;
-            margin-top: 30px;
-            text-align: center;
-            border: 1px solid #334155;
-        }
+.attendance {
+    background: #7c3aed;
+}
 
-        .welcome h2 {
-            margin-bottom: 15px;
-        }
+.payroll {
+    background: #16a34a;
+}
 
-        .welcome p {
-            color: #94a3b8;
-            line-height: 2.2;
-            max-width: 800px;
-            margin: auto;
-        }
+.payslip {
+    background: #ea580c;
+}
 
-        .status {
-            margin-top: 25px;
-            padding: 15px;
-            background: #0f172a;
-            border-radius: 12px;
-            color: #94a3b8;
-        }
+.loan {
+    background: #ca8a04;
+}
 
-        .status span {
-            color: #22c55e;
-            font-weight: bold;
-        }
+.settings {
+    background: #475569;
+}
 
-        footer {
-            text-align: center;
-            padding: 35px;
-            color: #64748b;
-        }
+.reports {
+    background: #2563eb;
+}
 
-        @media (max-width: 900px) {
+.about {
+    background: #9333ea;
+}
 
-            .dashboard {
-                grid-template-columns: 1fr;
-            }
 
-            .menu {
-                grid-template-columns: repeat(2, 1fr);
-            }
+/* =========================
+   معرفی سیستم
+========================= */
 
-        }
+.welcome {
+    margin-top: 35px;
+    background: #172033;
+    border: 1px solid #334155;
+    border-radius: 20px;
+    padding: 35px;
+    text-align: center;
+}
 
-        @media (max-width: 550px) {
+.welcome h2 {
+    margin-bottom: 20px;
+}
 
-            .menu {
-                grid-template-columns: 1fr;
-            }
+.welcome p {
+    color: #cbd5e1;
+    line-height: 2.2;
+    margin-bottom: 20px;
+}
 
-            .header h1 {
-                font-size: 23px;
-            }
+.status {
+    background: #0f172a;
+    border-radius: 12px;
+    padding: 15px;
+}
 
-        }
+.status span {
+    color: #22c55e;
+    font-weight: bold;
+}
 
-    </style>
+
+/* =========================
+   موبایل
+========================= */
+
+@media (max-width: 1000px) {
+
+    .menu {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .menu {
+        grid-template-columns: 1fr;
+    }
+
+    .header h1 {
+        font-size: 25px;
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -204,258 +222,360 @@
 <body>
 
 
+<!-- =========================
+     سربرگ
+========================= -->
+
 <header class="header">
 
-    <h1>
-        💼 سیستم مدیریت حقوق و دستمزد
-    </h1>
+<h1>
+💼 سیستم مدیریت حقوق و دستمزد
+</h1>
 
-    <p>
-        مدیریت کامل پرسنل، کارکرد، حقوق، مزایا، کسورات و فیش حقوقی
-    </p>
+<p>
+مدیریت کامل پرسنل، کارکرد، حقوق، مزایا، کسورات، وام و فیش حقوقی
+</p>
 
 </header>
+
 
 
 <div class="container">
 
 
-    <!-- داشبورد -->
+<!-- =========================
+     آمار
+========================= -->
 
-    <section class="dashboard">
-
-
-        <div class="card">
-
-            <h2>
-                👥 تعداد پرسنل
-            </h2>
-
-            <div
-                class="number"
-                id="employeeCount"
-            >
-                0
-            </div>
-
-        </div>
+<section class="stats">
 
 
-        <div class="card">
+<div class="stat-card">
 
-            <h2>
-                💰 مجموع حقوق پایه
-            </h2>
+<h3>
+👥 تعداد پرسنل
+</h3>
 
-            <div
-                class="number"
-                id="totalSalary"
-            >
-                0
-            </div>
+<div
+class="number"
+id="employeeCount"
+>
+0
+</div>
 
-        </div>
-
-
-        <div class="card">
-
-            <h2>
-                ⏱ مجموع اضافه‌کاری
-            </h2>
-
-            <div
-                class="number"
-                id="overtime"
-            >
-                0
-            </div>
-
-        </div>
+</div>
 
 
-    </section>
+<div class="stat-card">
+
+<h3>
+💰 مجموع حقوق پایه
+</h3>
+
+<div
+class="number"
+id="salaryTotal"
+>
+0
+</div>
+
+</div>
 
 
-    <!-- منوی اصلی -->
+<div class="stat-card">
 
-    <section class="menu">
+<h3>
+⏱️ مجموع اضافه‌کاری
+</h3>
 
+<div
+class="number"
+id="overtimeTotal"
+>
+0
+</div>
 
-        <button
-            class="employee"
-            onclick="window.location.href='employees.html'"
-        >
-
-            👤
-
-            <br><br>
-
-            مدیریت پرسنل
-
-        </button>
+</div>
 
 
-        <button
-            class="attendance"
-            onclick="window.location.href='attendance.html'"
-        >
-
-            🕐
-
-            <br><br>
-
-            حضور و غیاب
-
-        </button>
+</section>
 
 
-        <button
-            class="payroll"
-            onclick="window.location.href='payroll.html'"
-        >
 
-            💵
+<!-- =========================
+     منوی سیستم
+========================= -->
 
-            <br><br>
-
-            محاسبه حقوق
-
-        </button>
+<section class="menu">
 
 
-        <button
-            class="payslip"
-            onclick="window.location.href='payslip.html'"
-        >
+<button
+class="menu-button personnel"
+onclick="openPage('employees.html')"
+>
 
-            📄
+<span class="icon">
+👤
+</span>
 
-            <br><br>
+مدیریت پرسنل
 
-            فیش حقوقی
-
-        </button>
-
-
-    </section>
+</button>
 
 
-    <!-- توضیحات -->
 
-    <section class="welcome">
+<button
+class="menu-button attendance"
+onclick="openPage('attendance.html')"
+>
 
-        <h2>
-            به سیستم حقوق و دستمزد خوش آمدید 👋
-        </h2>
+<span class="icon">
+🕐
+</span>
 
-        <p>
+حضور و غیاب
 
-            این سیستم برای مدیریت اطلاعات کارکنان،
-            ثبت حضور و غیاب،
-            محاسبه حقوق و دستمزد،
-            محاسبه مزایا و کسورات،
-            مدیریت اضافه‌کاری،
-            محاسبه بیمه و مالیات
-            و تولید فیش حقوقی طراحی شده است.
-
-        </p>
+</button>
 
 
-        <div class="status">
 
-            وضعیت سیستم:
+<button
+class="menu-button payroll"
+onclick="openPage('payroll.html')"
+>
 
-            <span>
-                فعال
-            </span>
+<span class="icon">
+💵
+</span>
 
-        </div>
+محاسبه حقوق
 
-    </section>
+</button>
+
+
+
+<button
+class="menu-button payslip"
+onclick="openPage('payslip.html')"
+>
+
+<span class="icon">
+📄
+</span>
+
+فیش حقوقی
+
+</button>
+
+
+
+<button
+class="menu-button loan"
+onclick="openPage('loans.html')"
+>
+
+<span class="icon">
+💳
+</span>
+
+وام و مساعده
+
+</button>
+
+
+
+<button
+class="menu-button settings"
+onclick="openPage('settings.html')"
+>
+
+<span class="icon">
+⚙️
+</span>
+
+تنظیمات حقوق
+
+</button>
+
+
+
+<button
+class="menu-button reports"
+onclick="openPage('reports.html')"
+>
+
+<span class="icon">
+📊
+</span>
+
+گزارش‌ها
+
+</button>
+
+
+
+<button
+class="menu-button about"
+onclick="showAbout()"
+>
+
+<span class="icon">
+ℹ️
+</span>
+
+درباره سیستم
+
+</button>
+
+
+</section>
+
+
+
+<!-- =========================
+     معرفی
+========================= -->
+
+<section class="welcome">
+
+<h2>
+👋 به سیستم حقوق و دستمزد خوش آمدید
+</h2>
+
+<p>
+
+این سیستم برای مدیریت اطلاعات کارکنان،
+ثبت حضور و غیاب،
+محاسبه حقوق و دستمزد،
+مدیریت مزایا و کسورات،
+وام و مساعده،
+بیمه،
+مالیات
+و تولید فیش حقوقی طراحی شده است.
+
+</p>
+
+
+<div class="status">
+
+وضعیت سیستم:
+
+<span>
+فعال
+</span>
+
+</div>
+
+</section>
 
 
 </div>
 
 
-<footer>
-
-    سیستم مدیریت حقوق و دستمزد © 2026
-
-</footer>
-
 
 <script>
 
 
-    // ==============================
-    // دریافت اطلاعات پرسنل
-    // ==============================
+// =====================================
+// اطلاعات پرسنل
+// =====================================
 
-    let employees =
-        JSON.parse(
-            localStorage.getItem("employees")
-        ) || [];
-
-
-    // ==============================
-    // دریافت اطلاعات کارکرد
-    // ==============================
-
-    let attendanceRecords =
-        JSON.parse(
-            localStorage.getItem("attendanceRecords")
-        ) || [];
+const employees =
+JSON.parse(
+localStorage.getItem("employees")
+) || [];
 
 
-    // ==============================
-    // تعداد پرسنل
-    // ==============================
+// =====================================
+// اطلاعات کارکرد
+// =====================================
 
-    document.getElementById(
-        "employeeCount"
-    ).innerText = employees.length;
-
-
-    // ==============================
-    // محاسبه مجموع حقوق پایه
-    // ==============================
-
-    let totalSalary = 0;
+const attendanceRecords =
+JSON.parse(
+localStorage.getItem("attendanceRecords")
+) || [];
 
 
-    employees.forEach(function(employee) {
+// =====================================
+// نمایش تعداد پرسنل
+// =====================================
 
-        totalSalary +=
-            Number(employee.baseSalary) || 0;
-
-    });
-
-
-    document.getElementById(
-        "totalSalary"
-    ).innerText =
-        totalSalary.toLocaleString("fa-IR");
+document.getElementById(
+"employeeCount"
+).innerText =
+employees.length.toLocaleString("fa-IR");
 
 
-    // ==============================
-    // محاسبه مجموع اضافه کاری
-    // ==============================
+// =====================================
+// محاسبه مجموع حقوق پایه
+// =====================================
 
-    let totalOvertime = 0;
-
-
-    attendanceRecords.forEach(function(record) {
-
-        totalOvertime +=
-            Number(record.overtimeHours) || 0;
-
-    });
+let salaryTotal = 0;
 
 
-    document.getElementById(
-        "overtime"
-    ).innerText =
-        totalOvertime.toLocaleString("fa-IR");
+employees.forEach(function(employee) {
+
+salaryTotal +=
+Number(
+employee.baseSalary
+) || 0;
+
+});
+
+
+document.getElementById(
+"salaryTotal"
+).innerText =
+salaryTotal.toLocaleString("fa-IR");
+
+
+// =====================================
+// محاسبه مجموع اضافه کاری
+// =====================================
+
+let overtimeTotal = 0;
+
+
+attendanceRecords.forEach(function(record) {
+
+overtimeTotal +=
+Number(
+record.overtimeHours
+) || 0;
+
+});
+
+
+document.getElementById(
+"overtimeTotal"
+).innerText =
+overtimeTotal.toLocaleString("fa-IR");
+
+
+// =====================================
+// رفتن به صفحه
+// =====================================
+
+function openPage(page) {
+
+window.location.href = page;
+
+}
+
+
+// =====================================
+// درباره سیستم
+// =====================================
+
+function showAbout() {
+
+alert(
+"سیستم مدیریت حقوق و دستمزد\n\n" +
+"مدیریت پرسنل، حضور و غیاب، " +
+"حقوق، وام، مساعده، بیمه، مالیات و فیش حقوقی"
+);
+
+}
 
 
 </script>
@@ -464,4 +584,3 @@
 </body>
 
 </html>
-```
