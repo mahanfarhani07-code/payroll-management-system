@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>تنظیمات حقوق و دستمزد</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Tahoma, Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+}
+
+.header {
+    background: #172033;
+    padding: 28px;
+    text-align: center;
+    border-bottom: 2px solid #334155;
+}
+
+.header h1 {
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: #94a3b8;
+}
+
+.container {
+    width: 94%;
+    max-width: 1100px;
+    margin: 30px auto;
+}
+
+.box {
+    background: #1e293b;
+    padding: 28px;
+    border-radius: 20px;
+    border: 1px solid #334155;
+    margin-bottom: 25px;
+}
+
+.box h2 {
+    margin-bottom: 22px;
+}
+
+.info {
+    background: #172033;
+    border-right: 4px solid #38bdf8;
+    padding: 15px;
+    margin-bottom: 22px;
+    color: #cbd5e1;
+    line-height: 2;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    color: #cbd5e1;
+    margin-bottom: 8px;
+}
+
+input {
+    padding: 13px;
+    border-radius: 10px;
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: white;
+    font-family: inherit;
+}
+
+input:focus {
+    outline: none;
+    border-color: #38bdf8;
+}
+
+.unit {
+    color: #94a3b8;
+    margin-top: 6px;
+    font-size: 12px;
+}
+
+.buttons {
+    margin-top: 25px;
+    display: flex;
+    gap: 12px;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 13px 22px;
+    color: white;
+    font-family: inherit;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.save-btn {
+    background: #16a34a;
+}
+
+.reset-btn {
+    background: #dc2626;
+}
+
+.back-btn {
+    background: #475569;
+}
+
+.save-btn:hover {
+    background: #15803d;
+}
+
+.reset-btn:hover {
+    background: #b91c1c;
+}
+
+.back-btn:hover {
+    background: #334155;
+}
+
+.warning {
+    background: #451a03;
+    border-right: 4px solid #f59e0b;
+    color: #fde68a;
+    padding: 15px;
+    margin-top: 20px;
+    line-height: 2;
+}
+
+.success {
+    display: none;
+    background: #064e3b;
+    border-right: 4px solid #22c55e;
+    color: #bbf7d0;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+@media (max-width: 700px) {
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+<h1>
+⚙️ تنظیمات حقوق و دستمزد
+</h1>
+
+<p>
+مدیریت ضرایب و کسورات سیستم
+</p>
+
+</header>
+
+
+<div class="container">
+
+
+<section class="box">
+
+<h2>
+🧮 ضرایب محاسبه
+</h2>
+
+<div class="info">
+
+مقادیر زیر برای محاسبات سیستم استفاده می‌شوند.
+مقادیر را مطابق قوانین و مقررات موردنظر سازمان تنظیم کنید.
+
+</div>
+
+
+<div class="form-grid">
+
+
+<div class="input-group">
+
+<label>
+ضریب اضافه‌کاری
+</label>
+
+<input
+type="number"
+id="overtimeRate"
+step="0.01"
+min="0"
+>
+
+<div class="unit">
+مثلاً 1.4
+</div>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+ضریب شب‌کاری
+</label>
+
+<input
+type="number"
+id="nightRate"
+step="0.01"
+min="0"
+>
+
+<div class="unit">
+مثلاً 0.35
+</div>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+ضریب تعطیل‌کاری
+</label>
+
+<input
+type="number"
+id="holidayRate"
+step="0.01"
+min="0"
+>
+
+<div class="unit">
+مثلاً 1.4
+</div>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+درصد بیمه سهم پرسنل
+</label>
+
+<input
+type="number"
+id="insuranceRate"
+step="0.01"
+min="0"
+>
+
+<div class="unit">
+درصد
+</div>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+حداکثر بیمه
+</label>
+
+<input
+type="number"
+id="insuranceCeiling"
+min="0"
+>
+
+<div class="unit">
+ریال
+</div>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+حداقل ساعات موظفی
+</label>
+
+<input
+type="number"
+id="requiredHours"
+min="1"
+>
+
+<div class="unit">
+ساعت در ماه
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<section class="box">
+
+<h2>
+💰 تنظیمات مالیات
+</h2>
+
+
+<div class="info">
+
+فعلاً مالیات را به صورت درصدی تنظیم می‌کنیم.
+در مرحله بعد می‌توانیم جدول پلکانی مالیات را اضافه کنیم.
+
+</div>
+
+
+<div class="form-grid">
+
+
+<div class="input-group">
+
+<label>
+درصد مالیات
+</label>
+
+<input
+type="number"
+id="taxRate"
+step="0.01"
+min="0"
+>
+
+<div class="unit">
+درصد
+</div>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+معافیت مالیاتی ماهانه
+</label>
+
+<input
+type="number"
+id="taxExemption"
+min="0"
+>
+
+<div class="unit">
+ریال
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="warning">
+
+⚠️ نرخ‌های بیمه و مالیات را قبل از استفاده عملی،
+بر اساس مقررات قانونی و سال مالی مربوطه تنظیم کنید.
+
+</div>
+
+</section>
+
+
+
+<section class="box">
+
+<h2>
+💾 ذخیره تنظیمات
+</h2>
+
+
+<div class="buttons">
+
+
+<button
+class="save-btn"
+onclick="saveSettings()"
+>
+💾 ذخیره تنظیمات
+</button>
+
+
+<button
+class="reset-btn"
+onclick="resetSettings()"
+>
+♻️ بازگردانی پیش‌فرض
+</button>
+
+
+<button
+class="back-btn"
+onclick="goHome()"
+>
+🏠 صفحه اصلی
+</button>
+
+
+</div>
+
+
+<div
+class="success"
+id="success"
+>
+✅ تنظیمات با موفقیت ذخیره شد.
+</div>
+
+
+</section>
+
+
+</div>
+
+
+
+<script>
+
+
+// =====================================
+// تنظیمات پیش‌فرض
+// =====================================
+
+const defaultSettings = {
+
+overtimeRate: 1.4,
+
+nightRate: 0.35,
+
+holidayRate: 1.4,
+
+insuranceRate: 7,
+
+insuranceCeiling: 0,
+
+requiredHours: 176,
+
+taxRate: 0,
+
+taxExemption: 0
+
+};
+
+
+// =====================================
+// بارگذاری تنظیمات
+// =====================================
+
+function loadSettings() {
+
+
+let settings =
+JSON.parse(
+localStorage.getItem("salarySettings")
+);
+
+
+if (!settings) {
+
+settings =
+defaultSettings;
+
+}
+
+
+document.getElementById(
+"overtimeRate"
+).value =
+settings.overtimeRate;
+
+
+document.getElementById(
+"nightRate"
+).value =
+settings.nightRate;
+
+
+document.getElementById(
+"holidayRate"
+).value =
+settings.holidayRate;
+
+
+document.getElementById(
+"insuranceRate"
+).value =
+settings.insuranceRate;
+
+
+document.getElementById(
+"insuranceCeiling"
+).value =
+settings.insuranceCeiling;
+
+
+document.getElementById(
+"requiredHours"
+).value =
+settings.requiredHours;
+
+
+document.getElementById(
+"taxRate"
+).value =
+settings.taxRate;
+
+
+document.getElementById(
+"taxExemption"
+).value =
+settings.taxExemption;
+
+}
+
+
+// =====================================
+// ذخیره
+// =====================================
+
+function saveSettings() {
+
+
+const settings = {
+
+overtimeRate:
+Number(
+document.getElementById(
+"overtimeRate"
+).value
+),
+
+nightRate:
+Number(
+document.getElementById(
+"nightRate"
+).value
+),
+
+holidayRate:
+Number(
+document.getElementById(
+"holidayRate"
+).value
+),
+
+insuranceRate:
+Number(
+document.getElementById(
+"insuranceRate"
+).value
+),
+
+insuranceCeiling:
+Number(
+document.getElementById(
+"insuranceCeiling"
+).value
+),
+
+requiredHours:
+Number(
+document.getElementById(
+"requiredHours"
+).value
+),
+
+taxRate:
+Number(
+document.getElementById(
+"taxRate"
+).value
+),
+
+taxExemption:
+Number(
+document.getElementById(
+"taxExemption"
+).value
+)
+
+};
+
+
+localStorage.setItem(
+"salarySettings",
+JSON.stringify(
+settings
+)
+);
+
+
+document.getElementById(
+"success"
+).style.display =
+"block";
+
+
+setTimeout(function() {
+
+document.getElementById(
+"success"
+).style.display =
+"none";
+
+}, 3000);
+
+}
+
+
+// =====================================
+// بازگردانی
+// =====================================
+
+function resetSettings() {
+
+
+if (
+!confirm(
+"آیا می‌خواهید تنظیمات به حالت پیش‌فرض برگردد؟"
+)
+) {
+
+return;
+
+}
+
+
+localStorage.setItem(
+"salarySettings",
+JSON.stringify(
+defaultSettings
+)
+);
+
+
+loadSettings();
+
+
+}
+
+
+// =====================================
+// صفحه اصلی
+// =====================================
+
+function goHome() {
+
+window.location.href =
+"index.html";
+
+}
+
+
+// =====================================
+// شروع
+// =====================================
+
+loadSettings();
+
+
+</script>
+
+
+</body>
+
+</html>
