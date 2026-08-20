@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>وام و مساعده پرسنل</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Tahoma, Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+}
+
+.header {
+    background: #172033;
+    padding: 28px;
+    text-align: center;
+    border-bottom: 2px solid #334155;
+}
+
+.header h1 {
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: #94a3b8;
+}
+
+.container {
+    width: 94%;
+    max-width: 1300px;
+    margin: 30px auto;
+}
+
+.box {
+    background: #1e293b;
+    padding: 25px;
+    border-radius: 18px;
+    border: 1px solid #334155;
+    margin-bottom: 25px;
+}
+
+.box h2 {
+    margin-bottom: 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    color: #cbd5e1;
+    margin-bottom: 8px;
+}
+
+input,
+select {
+    padding: 13px;
+    border-radius: 10px;
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: white;
+    font-family: inherit;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #38bdf8;
+}
+
+.buttons {
+    margin-top: 22px;
+    display: flex;
+    gap: 12px;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 13px 22px;
+    color: white;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.save-btn {
+    background: #16a34a;
+}
+
+.back-btn {
+    background: #475569;
+}
+
+.delete-btn {
+    background: #dc2626;
+    padding: 8px 14px;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 1000px;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 13px;
+    text-align: center;
+    border-bottom: 1px solid #334155;
+}
+
+th {
+    background: #172033;
+    color: #38bdf8;
+}
+
+.empty {
+    padding: 30px;
+    color: #94a3b8;
+}
+
+.summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.summary-card {
+    background: #0f172a;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid #334155;
+}
+
+.summary-card h3 {
+    color: #94a3b8;
+    margin-bottom: 10px;
+}
+
+.summary-card div {
+    font-size: 22px;
+    color: #38bdf8;
+    font-weight: bold;
+}
+
+@media (max-width: 850px) {
+
+    .form-grid,
+    .summary {
+        grid-template-columns: 1fr;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+<h1>💳 مدیریت وام و مساعده</h1>
+
+<p>
+ثبت و مدیریت وام، مساعده و اقساط پرسنل
+</p>
+
+</header>
+
+
+<div class="container">
+
+
+<section class="box">
+
+<h2>➕ ثبت وام یا مساعده</h2>
+
+
+<div class="form-grid">
+
+
+<div class="input-group">
+
+<label>
+پرسنل
+</label>
+
+<select id="employee">
+
+<option value="">
+انتخاب پرسنل
+</option>
+
+</select>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+نوع
+</label>
+
+<select id="type">
+
+<option value="loan">
+وام
+</option>
+
+<option value="advance">
+مساعده
+</option>
+
+</select>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+مبلغ
+</label>
+
+<input
+type="number"
+id="amount"
+min="0"
+placeholder="مثلاً 50000000"
+>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+تعداد اقساط
+</label>
+
+<input
+type="number"
+id="installments"
+min="1"
+value="1"
+>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+مبلغ هر قسط
+</label>
+
+<input
+type="number"
+id="installmentAmount"
+min="0"
+placeholder="مبلغ قسط"
+>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+تاریخ شروع کسر
+</label>
+
+<input
+type="month"
+id="startMonth"
+>
+
+</div>
+
+
+<div class="input-group">
+
+<label>
+توضیحات
+</label>
+
+<input
+type="text"
+id="description"
+placeholder="توضیحات"
+>
+
+</div>
+
+
+</div>
+
+
+<div class="buttons">
+
+<button
+class="save-btn"
+onclick="saveLoan()"
+>
+💾 ثبت
+</button>
+
+
+<button
+class="back-btn"
+onclick="goHome()"
+>
+🏠 صفحه اصلی
+</button>
+
+</div>
+
+</section>
+
+
+
+<section class="box">
+
+<h2>📊 خلاصه</h2>
+
+
+<div class="summary">
+
+
+<div class="summary-card">
+
+<h3>
+تعداد وام‌ها
+</h3>
+
+<div id="loanCount">
+0
+</div>
+
+</div>
+
+
+<div class="summary-card">
+
+<h3>
+مجموع بدهی
+</h3>
+
+<div id="totalDebt">
+0 ریال
+</div>
+
+</div>
+
+
+<div class="summary-card">
+
+<h3>
+مجموع اقساط
+</h3>
+
+<div id="totalInstallments">
+0 ریال
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<section class="box">
+
+<h2>
+📋 لیست وام و مساعده
+</h2>
+
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+پرسنل
+</th>
+
+<th>
+نوع
+</th>
+
+<th>
+مبلغ
+</th>
+
+<th>
+تعداد اقساط
+</th>
+
+<th>
+قسط
+</th>
+
+<th>
+شروع کسر
+</th>
+
+<th>
+توضیحات
+</th>
+
+<th>
+عملیات
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="loanTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+</div>
+
+
+
+<script>
+
+
+// =====================================
+// اطلاعات پرسنل
+// =====================================
+
+let employees =
+JSON.parse(
+localStorage.getItem("employees")
+) || [];
+
+
+// =====================================
+// اطلاعات وام
+// =====================================
+
+let loans =
+JSON.parse(
+localStorage.getItem("loans")
+) || [];
+
+
+// =====================================
+// بارگذاری پرسنل
+// =====================================
+
+function loadEmployees() {
+
+const select =
+document.getElementById("employee");
+
+employees.forEach(function(employee) {
+
+const option =
+document.createElement("option");
+
+option.value =
+employee.personnelCode;
+
+option.textContent =
+employee.personnelCode +
+" - " +
+employee.fullName;
+
+select.appendChild(option);
+
+});
+
+}
+
+
+// =====================================
+// فرمت مبلغ
+// =====================================
+
+function money(value) {
+
+return Number(value || 0)
+.toLocaleString("fa-IR")
++
+" ریال";
+
+}
+
+
+// =====================================
+// ثبت وام
+// =====================================
+
+function saveLoan() {
+
+
+const personnelCode =
+document.getElementById(
+"employee"
+).value;
+
+
+const type =
+document.getElementById(
+"type"
+).value;
+
+
+const amount =
+Number(
+document.getElementById(
+"amount"
+).value
+);
+
+
+const installments =
+Number(
+document.getElementById(
+"installments"
+).value
+);
+
+
+let installmentAmount =
+Number(
+document.getElementById(
+"installmentAmount"
+).value
+);
+
+
+const startMonth =
+document.getElementById(
+"startMonth"
+).value;
+
+
+const description =
+document.getElementById(
+"description"
+).value;
+
+
+if (!personnelCode) {
+
+alert(
+"لطفاً پرسنل را انتخاب کنید."
+);
+
+return;
+
+}
+
+
+if (amount <= 0) {
+
+alert(
+"مبلغ را وارد کنید."
+);
+
+return;
+
+}
+
+
+if (installments <= 0) {
+
+alert(
+"تعداد اقساط را وارد کنید."
+);
+
+return;
+
+}
+
+
+// اگر مبلغ قسط وارد نشده باشد
+
+if (installmentAmount <= 0) {
+
+installmentAmount =
+Math.ceil(
+amount / installments
+);
+
+}
+
+
+const employee =
+employees.find(function(item) {
+
+return item.personnelCode ===
+personnelCode;
+
+});
+
+
+if (!employee) {
+
+alert(
+"پرسنل پیدا نشد."
+);
+
+return;
+
+}
+
+
+const loan = {
+
+id:
+Date.now(),
+
+personnelCode:
+personnelCode,
+
+employeeName:
+employee.fullName,
+
+type:
+type,
+
+amount:
+amount,
+
+installments:
+installments,
+
+installmentAmount:
+installmentAmount,
+
+paidInstallments:
+0,
+
+remainingAmount:
+amount,
+
+startMonth:
+startMonth,
+
+description:
+description
+
+};
+
+
+loans.push(loan);
+
+
+localStorage.setItem(
+"loans",
+JSON.stringify(loans)
+);
+
+
+alert(
+"وام یا مساعده با موفقیت ثبت شد."
+);
+
+
+document.getElementById(
+"amount"
+).value = "";
+
+
+document.getElementById(
+"installmentAmount"
+).value = "";
+
+
+document.getElementById(
+"description"
+).value = "";
+
+
+displayLoans();
+
+}
+
+
+// =====================================
+// نمایش وام‌ها
+// =====================================
+
+function displayLoans() {
+
+
+const table =
+document.getElementById(
+"loanTable"
+);
+
+
+table.innerHTML = "";
+
+
+if (loans.length === 0) {
+
+table.innerHTML = `
+
+<tr>
+
+<td colspan="8"
+class="empty">
+
+هنوز وام یا مساعده‌ای ثبت نشده است.
+
+</td>
+
+</tr>
+
+`;
+
+updateSummary();
+
+return;
+
+}
+
+
+loans.forEach(
+function(loan, index) {
+
+
+const row =
+document.createElement("tr");
+
+
+let typeText =
+loan.type === "loan"
+? "وام"
+: "مساعده";
+
+
+row.innerHTML = `
+
+<td>
+${loan.employeeName}
+</td>
+
+<td>
+${typeText}
+</td>
+
+<td>
+${money(loan.amount)}
+</td>
+
+<td>
+${loan.installments}
+</td>
+
+<td>
+${money(loan.installmentAmount)}
+</td>
+
+<td>
+${loan.startMonth || "-"}
+</td>
+
+<td>
+${loan.description || "-"}
+</td>
+
+<td>
+
+<button
+class="delete-btn"
+onclick="deleteLoan(${index})"
+>
+حذف
+</button>
+
+</td>
+
+`;
+
+
+table.appendChild(row);
+
+});
+
+updateSummary();
+
+}
+
+
+// =====================================
+// خلاصه
+// =====================================
+
+function updateSummary() {
+
+
+let totalDebt = 0;
+
+let totalInstallments = 0;
+
+
+loans.forEach(function(loan) {
+
+totalDebt +=
+Number(loan.remainingAmount || 0);
+
+totalInstallments +=
+Number(loan.installmentAmount || 0);
+
+});
+
+
+document.getElementById(
+"loanCount"
+).innerText =
+loans.length
+.toLocaleString("fa-IR");
+
+
+document.getElementById(
+"totalDebt"
+).innerText =
+money(totalDebt);
+
+
+document.getElementById(
+"totalInstallments"
+).innerText =
+money(totalInstallments);
+
+}
+
+
+// =====================================
+// حذف
+// =====================================
+
+function deleteLoan(index) {
+
+
+if (
+!confirm(
+"آیا از حذف این مورد مطمئن هستید؟"
+)
+) {
+
+return;
+
+}
+
+
+loans.splice(
+index,
+1
+);
+
+
+localStorage.setItem(
+"loans",
+JSON.stringify(loans)
+);
+
+
+displayLoans();
+
+}
+
+
+// =====================================
+// صفحه اصلی
+// =====================================
+
+function goHome() {
+
+window.location.href =
+"index.html";
+
+}
+
+
+// =====================================
+// شروع
+// =====================================
+
+loadEmployees();
+
+displayLoans();
+
+
+</script>
+
+
+</body>
+
+</html>
